@@ -16,6 +16,7 @@ const styles = {
     fontWeight: 'bold',
     marginTop: '1rem',
     marginBottom: '0.3rem',
+    textDecoration: 'underline',
   },
   ul: {
     listStyleType: 'disc',
