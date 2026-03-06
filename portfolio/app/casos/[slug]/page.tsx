@@ -36,9 +36,9 @@ export default async function Caso({
         <h2 className="text-2xl font-semibold mb-4">Proceso</h2>
 
         {caso.process.map((block: any, i: number) => (
-          <p key={i} className="mb-4 text-neutral-400">
+          <div key={i} className="mb-4 text-neutral-400">
             {block.children?.[0]?.text}
-          </p>
+          </div>
         ))}
       </section>
     )}
