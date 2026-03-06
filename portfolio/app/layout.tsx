@@ -12,12 +12,12 @@ export default function RootLayout({
 }) {
   return (
     <html lang="es">
-      <body className="bg-black text-white antialiased">
+      <body className="bg-white text-black">
 
       <header className="flex justify-between items-center px-16 py-6">
         <span className="font-bold">DG</span>
 
-        <nav className="space-x-6 text-sm text-neutral-400">
+        <nav className="space-x-6 text-sm text-black">
           <a href="/">Inicio</a>
           <a href="/casos">Casos</a>
           <a href="/sobre-mi">Sobre mí</a>

@@ -70,14 +70,14 @@ export default async function Caso({
         {caso?.title}
       </h1>
 
-      <p className="mt-6 text-neutral-400">
+      <p className="mt-6 text-neutral-500">
         {caso?.problem}
       </p>
       {caso?.process && (
       <section className="mt-16 max-w-3xl">
         <h2 className="text-2xl font-semibold mb-4">Proceso</h2>
 
-        <div className="text-neutral-400">
+        <div className="text-neutral-500">
           <PortableText value={caso.process} components={components} />
         </div>
       </section>
