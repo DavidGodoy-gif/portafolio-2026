@@ -1,13 +1,15 @@
 import { client } from "@/lib/sanity";
-import Link from "next/link";
+import CaseCard from "@/components/CaseCard";
 
 export const dynamic = "force-dynamic";
 
 async function getCasos() {
   return client.fetch(`
-    *[_type == "case"]{
+    *[_type == "case"] | order(_updatedAt desc) {
       title,
-      "slug": slug.current
+      "slug": slug.current,
+      excerpt,
+      thumbnail
     }
   `);
 }
@@ -16,21 +18,20 @@ export default async function Casos() {
   const casos = await getCasos();
 
   return (
-    <main className="px-16 py-24">
+    <main className="px-16 py-24 max-w-[1200px] mx-auto">
       <h1 className="text-4xl font-bold mb-12">Casos</h1>
 
-      <ul className="space-y-6">
+      <div className="grid gap-8 md:grid-cols-2">
         {casos.map((caso: any) => (
-          <li key={caso.slug}>
-            <Link
-              href={`/casos/${caso.slug}`}
-              className="text-xl underline"
-            >
-              {caso.title}
-            </Link>
-          </li>
+          <CaseCard
+            key={caso.slug}
+            title={caso.title}
+            slug={caso.slug}
+            excerpt={caso.excerpt}
+            thumbnail={caso.thumbnail}
+          />
         ))}
-      </ul>
+      </div>
     </main>
   );
 }

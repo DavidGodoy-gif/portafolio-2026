@@ -17,6 +17,26 @@ export default {
       },
     },
     {
+      name: "excerpt",
+      title: "Descripción corta",
+      type: "text",
+    },
+    {
+      name: "thumbnail",
+      title: "Imagen miniatura",
+      type: "image",
+      options: {
+        hotspot: true,
+      },
+      fields: [
+        {
+          name: "alt",
+          title: "Texto alternativo",
+          type: "string",
+        },
+      ],
+    },
+    {
       name: "problem",
       title: "Problema",
       type: "text",

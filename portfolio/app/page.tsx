@@ -1,24 +1,56 @@
-'use client'
-import { motion } from 'framer-motion'
+import CaseCard from '@/components/CaseCard'
+import { client } from '@/lib/sanity'
 
-export default function Home() {
+export const dynamic = "force-dynamic";
+
+async function getFeaturedCases() {
+  return client.fetch(`
+    *[_type == "case"] | order(_updatedAt desc)[0...3] {
+      title,
+      "slug": slug.current,
+      excerpt,
+      thumbnail
+    }
+  `)
+}
+
+export default async function Home() {
+  const casos = await getFeaturedCases()
+
   return (
-    <motion.main
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      className="px-24 py-32"
-    >
-      <motion.h1
-        initial={{ y: 40 }}
-        animate={{ y: 0 }}
-        className="text-6xl font-bold"
-      >
+    <main className="px-24 py-32 max-w-[1200px] mx-auto">
+      <h1 className="text-8xl font-bold text-center text-gradient-magenta-cyan">
         David Godoy
-      </motion.h1>
+      </h1>
 
-      <p className="mt-6 text-neutral-400">
-        UX Engineer — Research → Design → Frontend
+      <p className="mt-6 text-neutral-500 text-center">
+        UX Engineer — Research ► Design ► Frontend
       </p>
-    </motion.main>
+
+      <section className="mt-24">
+      <div className="flex items-center justify-between mb-8">
+        <h2 className="text-3xl font-bold">Casos destacados</h2>
+
+        <a
+          href="/casos"
+          className="text-neutral-400 hover:text-white transition"
+        >
+          Ver todos →
+        </a>
+      </div>
+
+        <div className="grid gap-8 md:grid-cols-2 xl:grid-cols-3">
+          {casos.map((caso: any) => (
+            <CaseCard
+              key={caso.slug}
+              title={caso.title}
+              slug={caso.slug}
+              excerpt={caso.excerpt}
+              thumbnail={caso.thumbnail}
+            />
+          ))}
+        </div>
+      </section>
+    </main>
   )
 }
