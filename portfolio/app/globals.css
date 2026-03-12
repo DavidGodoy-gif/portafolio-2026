@@ -19,7 +19,7 @@ body {
   color: text-neutral-400;
 }
 
-.text-gradient-magenta-cyan, h1 {
+.text-gradient-magenta-cyan {
   background: linear-gradient(-80deg, var(--cyan) 0%, var(--magenta) 80%);
   -webkit-background-clip: text;
   background-clip: text;

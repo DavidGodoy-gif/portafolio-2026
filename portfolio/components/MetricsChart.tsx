@@ -21,9 +21,22 @@ export default function MetricsChart({ data }: any) {
     >
       <ResponsiveContainer width="100%" height="100%">
         <BarChart data={data}>
+          <defs>
+            <linearGradient
+              id="magentaCyanGradient"
+              x1="0"
+              y1="0"
+              x2="1"
+              y2="0"
+              gradientTransform="rotate(45)"
+            >
+              <stop offset="0%" stopColor="var(--cyan)" />
+              <stop offset="100%" stopColor="var(--magenta)" />
+            </linearGradient>
+          </defs>
           <XAxis dataKey="label" />
           <Tooltip />
-          <Bar dataKey="value" />
+          <Bar dataKey="value" fill="url(#magentaCyanGradient)" />
         </BarChart>
       </ResponsiveContainer>
     </motion.div>

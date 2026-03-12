@@ -19,7 +19,7 @@ export default async function Casos() {
 
   return (
     <main className="px-16 py-24 max-w-[1200px] mx-auto">
-      <h1 className="text-4xl font-bold mb-12">Casos</h1>
+      <h1 className="text-4xl font-bold mb-12">Lo que he logrado</h1>
 
       <div className="grid gap-8 md:grid-cols-2">
         {casos.map((caso: any) => (
