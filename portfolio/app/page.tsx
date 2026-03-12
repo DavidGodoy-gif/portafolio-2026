@@ -18,7 +18,7 @@ export default async function Home() {
   const casos = await getFeaturedCases()
 
   return (
-    <main className="px-24 py-32 max-w-[1200px] mx-auto">
+    <main className="px-8 py-8 md:px-24 md:py-32 max-w-[1200px] mx-auto">
       <h1 className="text-8xl font-bold text-center text-gradient-magenta-cyan">
         David Godoy
       </h1>

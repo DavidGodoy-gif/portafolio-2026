@@ -30,7 +30,7 @@ export default async function Caso({
 
   if (!caso) {
     return (
-      <main className="px-16 py-24">
+      <main className="px-8 py-8 md:px-24 md:py-32">
         <div className="max-w-[800px] mx-auto text-left">
           <h1 className="text-3xl font-bold">Caso no encontrado</h1>
         </div>
@@ -39,7 +39,7 @@ export default async function Caso({
   }
 
   return (
-    <main className="px-16 py-24">
+    <main className="px-8 py-8 md:px-24 md:py-32">
       <div className="max-w-[800px] mx-auto text-left">
         <h1 className="text-4xl font-bold text-gradient-magenta-cyan">
           {caso.title}
@@ -60,7 +60,7 @@ export default async function Caso({
 
         {caso.process && (
           <section className="mt-16">
-            <h2 className="text-2xl mb-4 font-bold">Proceso</h2>
+            <h2 className="text-2xl mb-4 font-bold case-title">Proceso</h2>
 
             <div className="text-neutral-500">
               <CasePortableContent value={caso.process} />

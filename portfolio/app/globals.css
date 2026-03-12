@@ -27,10 +27,16 @@ body {
 }
 
 h2 {
-  color: var(--cyan);
+  border-bottom: 3px solid var(--cyan);
 }
 
 
 h3 {
-  color: var(--magenta);
+  border-bottom: 2px solid var(--magenta);
+  display: inline-block;
+}
+
+.case-title {
+  color: white;
+  background: var(--cyan);
 }
