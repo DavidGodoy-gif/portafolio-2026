@@ -1,6 +1,7 @@
 import CaseCard from '@/components/CaseCard'
 import { client } from '@/lib/sanity'
 
+
 export const dynamic = "force-dynamic";
 
 async function getFeaturedCases() {
@@ -19,10 +20,10 @@ export default async function Home() {
 
   return (
     <main className="px-8 py-8 md:px-24 md:py-32 max-w-[1200px] mx-auto">
-      <h1 className="text-8xl font-bold text-center text-gradient-magenta-cyan">
+      <h1 className="text-8xl font-bold text-center text-gradient-magenta-cyan fade-in-up">
         David Godoy
       </h1>
-
+      
       <p className="mt-6 text-neutral-500 text-center">
         UX Engineer — Research ► Design ► Frontend
       </p>

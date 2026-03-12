@@ -5,6 +5,10 @@
   --foreground: #171717;
   --magenta: #BA007C;
   --cyan: #009BDB;
+  --purple: #5C4FAC;
+  --magenta20: #fbf2f8;
+  --cyan20: #f2fafd;
+  --purple20: #eeeef7;
 }
 
 @theme inline {
@@ -27,16 +31,46 @@ body {
 }
 
 h2 {
-  border-bottom: 3px solid var(--cyan);
+  color: var(--purple);
+  margin-top: 48px;
 }
 
 
 h3 {
-  border-bottom: 2px solid var(--magenta);
+  color: var(--purple);
   display: inline-block;
+  margin-top: 24px;
 }
 
 .case-title {
   color: white;
-  background: var(--cyan);
+  padding: 5px 20px 5px 20px;
+  background: linear-gradient(-80deg, var(--cyan) 0%, var(--magenta) 80%);
+}
+
+.bgsoft {
+  background: var(--magenta20);
+}
+
+.bgsoft-two {
+  background: var(--cyan20);
+}
+
+.bgsoft-three {
+  background: var(--purple20);
+}
+
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-in-up {
+  animation: fade-in-up 1s ease-out both;
 }

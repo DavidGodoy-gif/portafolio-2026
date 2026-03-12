@@ -45,18 +45,20 @@ export default async function Caso({
           {caso.title}
         </h1>
 
-        <p className="mt-6 mb-6 text-neutral-500">{caso.problem}</p>
+        <div className="mt-6 mb-6 flex flex-col md:flex-row md:items-start md:gap-8">
+          <p className="text-neutral-500 md:w-1/2">{caso.problem}</p>
 
-        {imageUrl && (
-          <div className="relative h-[400px] overflow-hidden mb-6 rounded-md">
-            <Image
-              src={imageUrl}
-              alt={alt}
-              fill
-              className="object-cover"
-            />
-          </div>
-        )}
+          {imageUrl && (
+            <div className="md:h-[250px] md:w-[250px] h-[150px] w-[150px] relative overflow-hidden rounded-full md:mt-0 mt-16 mx-auto fade-in-up">
+              <Image
+                src={imageUrl}
+                alt={alt}
+                fill
+                className="object-cover"
+              />
+            </div>
+          )}
+        </div>
 
         {caso.process && (
           <section className="mt-16">
