@@ -49,7 +49,7 @@ export default async function Caso({
           <p className="text-neutral-500 md:w-1/2">{caso.problem}</p>
 
           {imageUrl && (
-            <div className="md:h-[250px] md:w-[250px] h-[150px] w-[150px] relative overflow-hidden rounded-full md:mt-0 mt-16 mx-auto fade-in-up">
+            <div className="md:h-[250px] md:w-[250px] h-[150px] w-[150px] relative overflow-hidden rounded-full md:mt-0 mt-4 mx-auto fade-in-up">
               <Image
                 src={imageUrl}
                 alt={alt}

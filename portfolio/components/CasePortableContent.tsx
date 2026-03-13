@@ -25,6 +25,10 @@ const styles = {
   li: {
     marginBottom: "0.3rem",
   },
+  code: {
+    background: "#000",
+    color: "#fff",
+  }
 };
 
 const components = {
@@ -39,6 +43,9 @@ const components = {
   listItem: {
     bullet: (props: any) => <li style={styles.li}>{props.children}</li>,
     number: (props: any) => <li style={styles.li}>{props.children}</li>,
+  },
+  code: {
+    code: (props: any) => <code style={styles.code}>{props.children}</code>,
   },
   types: {
     image: PortableImage,

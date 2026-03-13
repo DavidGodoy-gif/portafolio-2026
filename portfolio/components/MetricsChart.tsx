@@ -31,7 +31,7 @@ export default function MetricsChart({ data }: any) {
               gradientTransform="rotate(45)"
             >
               <stop offset="0%" stopColor="var(--cyan)" />
-              <stop offset="100%" stopColor="var(--magenta)" />
+              <stop offset="100%" stopColor="var(--purple)" />
             </linearGradient>
           </defs>
           <XAxis dataKey="label" />

@@ -48,6 +48,10 @@ h3 {
   background: linear-gradient(-80deg, var(--cyan) 0%, var(--magenta) 80%);
 }
 
+.bgmargin + .bgmargin {
+ margin-top: 0;
+}
+
 .bgsoft {
   background: var(--magenta20);
 }
@@ -73,4 +77,46 @@ h3 {
 
 .fade-in-up {
   animation: fade-in-up 1s ease-out both;
+}
+
+a {
+  display: inline-block;
+  padding: 5px;
+  background: var(--cyan);
+  border-radius: 3vb;
+  color: var(--color-white);
+  padding: 1vb;
+  margin: 1vb;
+  margin-left: 0;
+}
+
+.alink {
+  background: none;
+  padding: 0;
+}
+
+strong, b {
+  color: var(--cyan);
+}
+
+
+header {
+  a {
+    color: var(--color-black);
+    background: none;
+  }
+}
+
+ul {
+  li::marker {
+    color: var(--magenta);
+  }
+}
+
+code {
+  background: var(--color-black);
+  display: block;
+  color: var(--cyan);
+  padding: 2vb;
+  font-size: small;
 }
