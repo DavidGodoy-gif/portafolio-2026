@@ -125,5 +125,41 @@ export default {
         },
       ],
     },
+    {
+      name: "tableBlock",
+      title: "Tabla",
+      type: "object",
+      fields: [
+        {
+          name: "title",
+          title: "Título de la tabla",
+          type: "string",
+        },
+        {
+          name: "headers",
+          title: "Encabezados",
+          type: "array",
+          of: [{ type: "string" }],
+        },
+        {
+          name: "rows",
+          title: "Filas",
+          type: "array",
+          of: [
+            {
+              type: "object",
+              fields: [
+                {
+                  name: "cells",
+                  title: "Celdas",
+                  type: "array",
+                  of: [{ type: "string" }],
+                },
+              ],
+            },
+          ],
+        },
+      ],
+    },
   ],
 };

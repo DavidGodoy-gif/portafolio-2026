@@ -3,6 +3,7 @@
 import { PortableText } from "@portabletext/react";
 import PortableImage from "@/components/PortableImage";
 import PortableChart from "@/components/PortableChart";
+import PortableTable from "@/components/PortableTable";
 
 const styles = {
   h2: {
@@ -25,10 +26,6 @@ const styles = {
   li: {
     marginBottom: "0.3rem",
   },
-  code: {
-    background: "#000",
-    color: "#fff",
-  }
 };
 
 const components = {
@@ -44,12 +41,10 @@ const components = {
     bullet: (props: any) => <li style={styles.li}>{props.children}</li>,
     number: (props: any) => <li style={styles.li}>{props.children}</li>,
   },
-  code: {
-    code: (props: any) => <code style={styles.code}>{props.children}</code>,
-  },
   types: {
     image: PortableImage,
     chartBlock: PortableChart,
+    tableBlock: PortableTable,
   },
 };
 
