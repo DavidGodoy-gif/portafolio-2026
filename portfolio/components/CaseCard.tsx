@@ -37,7 +37,7 @@ export default function CaseCard({
       <div className="p-6">
         <h3 className="text-2xl font-semibold">{title}</h3>
         {excerpt && (
-          <p className="mt-3 text-neutral-500 line-clamp-3">
+          <p className="mt-3 text-neutral-400 line-clamp-3">
             {excerpt}
           </p>
         )}

@@ -4,6 +4,8 @@ import { PortableText } from "@portabletext/react";
 import PortableImage from "@/components/PortableImage";
 import PortableChart from "@/components/PortableChart";
 import PortableTable from "@/components/PortableTable";
+import PortableEmbed from "@/components/PortableEmbed";
+import PortableCode from "@/components/PortableCode";
 
 const styles = {
   h2: {
@@ -45,6 +47,8 @@ const components = {
     image: PortableImage,
     chartBlock: PortableChart,
     tableBlock: PortableTable,
+    embedBlock: PortableEmbed,
+    codeBlock: PortableCode,
   },
 };
 

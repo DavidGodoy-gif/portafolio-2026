@@ -24,23 +24,23 @@ export default async function Home() {
         David Godoy
       </h1>
       
-      <p className="mt-6 text-neutral-500 text-center">
+      <p className="mt-6 text-center">
         UX Engineer — Research ► Design ► Frontend
       </p>
 
       <section className="mt-24">
-      <div className="flex items-center justify-between mb-8">
-        <h2 className="text-3xl font-bold">Casos destacados</h2>
+      <div className="flex items-center justify-between gap-4 mb-8">
+        <h2 className="text-3xl font-bold titlecase">Casos destacados</h2>
 
         <a
           href="/casos"
-          className="text-neutral-400 hover:text-white transition"
+          className="text-neutral-400 hover:text-white transition m-0 inline-flex items-center"
         >
           Ver todos →
         </a>
       </div>
 
-        <div className="grid gap-8 md:grid-cols-2 xl:grid-cols-3">
+        <div className="grid gap-8 md:grid-cols-2 xl:grid-cols-2">
           {casos.map((caso: any) => (
             <CaseCard
               key={caso.slug}

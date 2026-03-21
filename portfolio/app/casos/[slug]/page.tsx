@@ -10,7 +10,16 @@ async function getCaso(slug: string) {
       title,
       thumbnail,
       problem,
-      process
+      "process": process[]{
+        ...,
+        _type == "image" => {
+          ...,
+          asset->{
+            ...,
+            metadata { dimensions }
+          }
+        }
+      }
     }`,
     { slug }
   );
@@ -46,7 +55,7 @@ export default async function Caso({
         </h1>
 
         <div className="mt-6 mb-6 flex flex-col md:flex-row md:items-start md:gap-8">
-          <p className="text-neutral-500 md:w-1/2">{caso.problem}</p>
+          <p className="md:w-1/2">{caso.problem}</p>
 
           {imageUrl && (
             <div className="md:h-[250px] md:w-[250px] h-[150px] w-[150px] relative overflow-hidden rounded-full md:mt-0 mt-4 mx-auto fade-in-up">
@@ -62,9 +71,10 @@ export default async function Caso({
 
         {caso.process && (
           <section className="mt-16">
-            <h2 className="text-2xl mb-4 font-bold case-title">Proceso</h2>
+            <h2 className="text-2xl mb-4 font-bold">Proceso</h2>
+            <div className="case-title"></div>
 
-            <div className="text-neutral-500">
+            <div>
               <CasePortableContent value={caso.process} />
             </div>
           </section>

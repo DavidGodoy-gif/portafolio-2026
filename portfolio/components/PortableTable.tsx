@@ -15,14 +15,14 @@ type PortableTableProps = {
           <h3 className="text-xl font-semibold mb-4">{value.title}</h3>
         )}
   
-        <table className="w-full border-collapse overflow-hidden rounded-xl border border-neutral-800 text-sm">
+        <table className="w-full border-collapse overflow-hidden rounded-xl border codetheme text-sm">
           {value.headers?.length ? (
             <thead className="bg-neutral-900">
               <tr>
                 {value.headers.map((header, index) => (
                   <th
                     key={index}
-                    className="border-b border-neutral-800 px-4 py-3 text-left font-semibold text-white"
+                    className="border-b codetheme px-4 py-3 text-left font-semibold text-white"
                   >
                     {header}
                   </th>
@@ -37,7 +37,7 @@ type PortableTableProps = {
                 {row.cells?.map((cell, cellIndex) => (
                   <td
                     key={cellIndex}
-                    className="border-t border-neutral-800 px-4 py-3 text-neutral-400"
+                    className="border-t codetheme px-4 py-3 text-neutral-400"
                   >
                     {cell}
                   </td>
