@@ -1,3 +1,5 @@
+import portableBodyBlocks from "./portableBodyBlocks";
+
 export default {
   name: "case",
   title: "UX Case",
@@ -7,6 +9,12 @@ export default {
       name: "title",
       title: "Título",
       type: "string",
+    },
+    {
+      name: "order",
+      title: "Orden (prioridad)",
+      type: "number",
+      description: "Menor número = más arriba",
     },
     {
       name: "slug",
@@ -45,63 +53,7 @@ export default {
       name: "process",
       title: "Proceso UX",
       type: "array",
-      of: [
-        {
-          type: "block",
-        },
-        {
-          type: "image",
-          options: {
-            hotspot: true,
-          },
-          fields: [
-            {
-              name: "alt",
-              title: "Texto alternativo",
-              type: "string",
-            },
-            {
-              name: "caption",
-              title: "Caption",
-              type: "string",
-            },
-          ],
-        },
-        {
-          name: "chartBlock",
-          title: "Bloque de gráfico",
-          type: "object",
-          fields: [
-            {
-              name: "title",
-              title: "Título del gráfico",
-              type: "string",
-            },
-            {
-              name: "metrics",
-              title: "Métricas",
-              type: "array",
-              of: [
-                {
-                  type: "object",
-                  fields: [
-                    {
-                      name: "label",
-                      title: "Etiqueta",
-                      type: "string",
-                    },
-                    {
-                      name: "value",
-                      title: "Valor",
-                      type: "number",
-                    },
-                  ],
-                },
-              ],
-            },
-          ],
-        },
-      ],
+      of: portableBodyBlocks,
     },
     {
       name: "metrics",
@@ -120,42 +72,6 @@ export default {
               name: "value",
               title: "Valor",
               type: "number",
-            },
-          ],
-        },
-      ],
-    },
-    {
-      name: "tableBlock",
-      title: "Tabla",
-      type: "object",
-      fields: [
-        {
-          name: "title",
-          title: "Título de la tabla",
-          type: "string",
-        },
-        {
-          name: "headers",
-          title: "Encabezados",
-          type: "array",
-          of: [{ type: "string" }],
-        },
-        {
-          name: "rows",
-          title: "Filas",
-          type: "array",
-          of: [
-            {
-              type: "object",
-              fields: [
-                {
-                  name: "cells",
-                  title: "Celdas",
-                  type: "array",
-                  of: [{ type: "string" }],
-                },
-              ],
             },
           ],
         },

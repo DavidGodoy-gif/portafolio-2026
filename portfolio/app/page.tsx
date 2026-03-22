@@ -34,9 +34,9 @@ export default async function Home() {
 
         <a
           href="/casos"
-          className="text-neutral-400 hover:text-white transition m-0 inline-flex items-center"
+          className="text-center"
         >
-          Ver todos →
+          Ver todos <span className="hidden md:inline">→</span>
         </a>
       </div>
 

@@ -5,7 +5,7 @@ export const dynamic = "force-dynamic";
 
 async function getCasos() {
   return client.fetch(`
-    *[_type == "case"] | order(_updatedAt desc) {
+    *[_type == "case"] | order(order asc) | order(_updatedAt desc) {
       title,
       "slug": slug.current,
       excerpt,

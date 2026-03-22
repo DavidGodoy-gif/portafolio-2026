@@ -34,17 +34,21 @@ export default function PortableImage({ value, index = 0 }: PortableImageProps) 
     <motion.div
       ref={ref}
       style={{ opacity, y }}
-      className={`${bgClass} w-screen relative left-1/2 right-1/2 mt-4 -translate-x-1/2 overflow-hidden bgmargin`}
+      className={`${bgClass} w-screen relative left-1/2 right-1/2 mt-4 -translate-x-1/2 overflow-x-visible overflow-y-hidden md:overflow-hidden bgmargin`}
     >
-      <figure className="my-8 flex flex-col items-center">
-        <Image
-          src={imageUrl}
-          alt={value.alt || ""}
-          width={intrinsicW}
-          height={intrinsicH}
-          sizes="(max-width: 800px) 100vw, 800px"
-          className="h-auto w-full max-w-[800px] object-contain"
-        />
+      <figure className="my-8 flex w-full flex-col items-center">
+        <div className="w-full overflow-x-auto [-webkit-overflow-scrolling:touch] md:overflow-x-visible">
+          <div className="mx-auto flex min-h-[380px] w-max justify-center md:block md:w-full md:max-w-[800px]">
+            <Image
+              src={imageUrl}
+              alt={value.alt || ""}
+              width={intrinsicW}
+              height={intrinsicH}
+              sizes="(max-width: 768px) 200vw, 800px"
+              className="min-h-[380px] h-auto w-auto max-w-none object-contain md:w-full md:max-w-[800px]"
+            />
+          </div>
+        </div>
         {value.caption && (
           <figcaption className="mt-4 mb-6 px-5 text-sm italic max-w-[1200px] w-full text-center">
             {value.caption}

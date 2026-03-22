@@ -1,4 +1,6 @@
 import "./globals.css";
+import { Footer } from "@/components/Footer";
+import { HeaderNav } from "@/components/HeaderNav";
 
 export const metadata = {
   title: "David Godoy — UX + Frontend",
@@ -14,21 +16,19 @@ export default function RootLayout({
     <html lang="es">
       <body className="bg-white text-black">
 
-      <header className="fixed top-0 left-0 right-0 z-50 flex justify-between items-center px-16 py-6 backdrop-blur border-gray-200">
+      <header className="fixed top-0 left-0 right-0 z-110 flex justify-between items-center px-6 py-6 md:px-16 backdrop-blur border-gray-200">
         <a href="/">
           <img src="/Logo_DG.svg" alt="Logo" width={52} height={28} />
         </a>
 
-        <nav className="space-x-6 text-sm">
-          <a href="/">Inicio</a>
-          <a href="/casos">Casos</a>
-          <a href="/sobre-mi">Sobre mí</a>
-        </nav>
+        <HeaderNav />
       </header>
 
       <main className="pt-20">
         {children}
       </main>
+
+      <Footer />
 
       </body>
 

@@ -75,7 +75,7 @@ h3 {
   animation: fade-in-up 1s ease-out both;
 }
 
-a, .btnzoom {
+a, .btnzoom, .linkClass {
   display: inline-block;
   padding: 1vb;
   border:1px solid var(--cyan);
@@ -83,6 +83,37 @@ a, .btnzoom {
   color: var(--cyan);
   margin: 1vb;
   margin-left: 0;
+}
+
+/* Footer: mismo estilo cian + borde que los <a>, también para botones copiar */
+footer a.footer-social-icon,
+footer button.footer-social-icon {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 1vb;
+  border: 1px solid var(--cyan);
+  border-radius: 3vb;
+  color: var(--cyan);
+  margin: 1vb;
+  margin-left: 0;
+  background: transparent;
+  cursor: pointer;
+  font: inherit;
+  text-decoration: none;
+  transition: color 0.15s ease, border-color 0.15s ease, background-color 0.15s ease;
+}
+
+footer a.footer-social-icon:hover,
+footer button.footer-social-icon:hover {
+  color: var(--color-gray-100);
+  border-color: var(--color-gray-100);
+}
+
+footer a.footer-social-icon:focus-visible,
+footer button.footer-social-icon:focus-visible {
+  outline: 2px solid var(--cyan);
+  outline-offset: 2px;
 }
 
 .alink {
@@ -115,4 +146,24 @@ ul {
 
 .titlecase {
   margin-top: 0;
+}
+
+.bglink {
+  background: var(--color-gray-950);
+}
+
+.btncopy {
+  position: absolute;
+  top: -20px;
+  left: 100%;
+  background: var(--color-gray-950);
+  color: var(--color-gray-400);
+  border-radius: 3vb;
+  padding: 1vb;
+  display: block;
+  z-index: 100;
+}
+
+sexo {
+  color: var(--color-gray-400);
 }
