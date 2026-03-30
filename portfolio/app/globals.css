@@ -141,7 +141,11 @@ ul {
 
 .codetheme {
   border-color: var(--cyandark);
-  background: var(--color-gray-950);
+  background: var(--color-gray-900);
+}
+
+.sexo {	
+  color: var(--color-gray-400);
 }
 
 .titlecase {

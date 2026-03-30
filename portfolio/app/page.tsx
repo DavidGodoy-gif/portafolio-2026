@@ -40,7 +40,7 @@ export default async function Home() {
         </a>
       </div>
 
-        <div className="grid gap-8 md:grid-cols-2 xl:grid-cols-2">
+        <div className="grid gap-8 md:grid-cols-3 xl:grid-cols-3">
           {casos.map((caso: any) => (
             <CaseCard
               key={caso.slug}
