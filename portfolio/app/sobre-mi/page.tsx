@@ -50,7 +50,7 @@ export default async function SobreMi() {
             </div>
           </section>
         ) : (
-          <p className="mt-6 text-neutral-400 leading-relaxed">{FALLBACK_PARAGRAPH}</p>
+          <p className="mt-6 pt-6 text-neutral-400 leading-relaxed">{FALLBACK_PARAGRAPH}</p>
         )}
       </div>
     </main>

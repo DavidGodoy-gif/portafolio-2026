@@ -53,6 +53,8 @@ function formatMermaidError(e: unknown): string {
 
 /** Montado con `key={code}` para resetear estado al cambiar el diagrama sin setState síncrono en el efecto. */
 function MermaidDiagram({ code }: { code: string }) {
+  /** Evita hidratación: el SVG solo existe en el cliente; SSR y primer paint coinciden en el placeholder. */
+  const [mounted, setMounted] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
   /** Área real del diagrama (excl. barra de zoom); evita height % sin cadena de altura en móvil. */
   const viewportRef = useRef<HTMLDivElement>(null);
@@ -68,7 +70,11 @@ function MermaidDiagram({ code }: { code: string }) {
   );
 
   useEffect(() => {
-    if (!ref.current) return;
+    setMounted(true);
+  }, []);
+
+  useEffect(() => {
+    if (!mounted || !ref.current) return;
 
     initMermaid();
 
@@ -126,7 +132,20 @@ function MermaidDiagram({ code }: { code: string }) {
     return () => {
       cancelled = true;
     };
-  }, [diagramId, code]);
+  }, [mounted, diagramId, code]);
+
+  if (!mounted) {
+    return (
+      <div
+        className="flex h-[400px] flex-col overflow-hidden rounded-2xl border codetheme md:h-[600px]"
+        role="status"
+        aria-label="Cargando diagrama"
+      >
+        <div className="h-[49px] shrink-0 border-b codetheme" />
+        <div className="min-h-0 flex-1 animate-pulse bg-neutral-800/15" />
+      </div>
+    );
+  }
 
   return (
     <div className="flex h-[400px] flex-col overflow-hidden rounded-2xl border codetheme md:h-[600px]">
@@ -184,7 +203,7 @@ function MermaidDiagram({ code }: { code: string }) {
               <div className="relative flex min-h-[200px] w-full flex-col items-center justify-center">
                 <div
                   ref={ref}
-                  className="mermaid"
+                  className="mermaid-svg-host"
                   style={{
                     opacity: rendered && !mermaidError ? 1 : 0,
                     transition: "opacity 0.3s ease",
