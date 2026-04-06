@@ -18,6 +18,18 @@ async function getCaso(slug: string) {
             ...,
             metadata { dimensions }
           }
+        },
+        _type == "pdfBlock" => {
+          ...,
+          file {
+            ...,
+            asset->{
+              url,
+              originalFilename,
+              mimeType,
+              size
+            }
+          }
         }
       }
     }`,

@@ -48,6 +48,18 @@ h3 {
  margin-top: -10px;
 }
 
+.portable-pdf-block.bgmargin {
+  margin-top: 20px;
+}
+
+main.sobre-mi-page .sobre-mi-portable {
+  padding-bottom: 1.5rem;
+}
+
+main.sobre-mi-page .sobre-mi-portable .bgmargin {
+  margin-bottom: 2.5rem;
+}
+
 .bgsoft {
   background: var(--magenta20);
 }
@@ -83,6 +95,7 @@ a, .btnzoom, .linkClass {
   color: var(--cyan);
   margin: 1vb;
   margin-left: 0;
+  text-decoration: none;
 }
 
 /* Footer: mismo estilo cian + borde que los <a>, también para botones copiar */
@@ -141,11 +154,7 @@ ul {
 
 .codetheme {
   border-color: var(--cyandark);
-  background: var(--color-gray-900);
-}
-
-.sexo {	
-  color: var(--color-gray-400);
+  background: var(--color-gray-950);
 }
 
 .titlecase {
@@ -166,8 +175,4 @@ ul {
   padding: 1vb;
   display: block;
   z-index: 100;
-}
-
-sexo {
-  color: var(--color-gray-400);
 }

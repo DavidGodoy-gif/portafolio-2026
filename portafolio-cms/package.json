@@ -5,6 +5,7 @@
   "main": "package.json",
   "license": "UNLICENSED",
   "scripts": {
+    "postinstall": "node ./scripts/repair-rollup-native.mjs",
     "dev": "sanity dev",
     "start": "sanity start",
     "build": "sanity build",
@@ -15,13 +16,14 @@
     "sanity"
   ],
   "dependencies": {
-    "@sanity/vision": "^5.17.1",
+    "@sanity/vision": "^5.18.0",
     "react": "^19.1",
     "react-dom": "^19.1",
-    "sanity": "^5.17.1",
+    "sanity": "^5.18.0",
     "styled-components": "^6.1.18"
   },
   "devDependencies": {
+    "@rollup/rollup-win32-x64-msvc": "4.59.0",
     "@sanity/eslint-config-studio": "^6.0.0",
     "@types/react": "^19.1",
     "eslint": "^9.28",

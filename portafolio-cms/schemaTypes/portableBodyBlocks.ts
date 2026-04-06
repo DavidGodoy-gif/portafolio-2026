@@ -1,3 +1,12 @@
+/** Subconjunto del builder de validación de Sanity (sin importar el paquete `sanity`). */
+type SanityValidationChain = {
+  error: (message: string) => SanityValidationChain;
+};
+
+type SanityFileFieldRule = {
+  required: () => SanityValidationChain;
+};
+
 /** Mismos bloques que el campo `process` de UX Case — compartido con Sobre mí. */
 export default [
   {
@@ -128,6 +137,47 @@ export default [
         name: "url",
         title: "URL del embed",
         type: "url",
+      },
+    ],
+  },
+  {
+    name: "pdfBlock",
+    title: "Archivo PDF",
+    type: "object",
+    preview: {
+      select: {
+        title: "title",
+        filename: "file.asset.originalFilename",
+      },
+      prepare({
+        title,
+        filename,
+      }: {
+        title?: string;
+        filename?: string;
+      }) {
+        return {
+          title: title || "PDF",
+          subtitle: filename || "Sin archivo",
+        };
+      },
+    },
+    fields: [
+      {
+        name: "title",
+        title: "Título o descripción",
+        type: "string",
+        description: "Texto que verá el visitante encima del documento.",
+      },
+      {
+        name: "file",
+        title: "PDF",
+        type: "file",
+        options: {
+          accept: ".pdf",
+        },
+        validation: (rule: SanityFileFieldRule) =>
+          rule.required().error("Sube un archivo PDF"),
       },
     ],
   },

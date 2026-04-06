@@ -6,6 +6,7 @@ import PortableChart from "@/components/PortableChart";
 import PortableTable from "@/components/PortableTable";
 import PortableEmbed from "@/components/PortableEmbed";
 import PortableCode from "@/components/PortableCode";
+import PortablePdf from "@/components/PortablePdf";
 
 const styles = {
   h2: {
@@ -49,6 +50,7 @@ const components = {
     tableBlock: PortableTable,
     embedBlock: PortableEmbed,
     codeBlock: PortableCode,
+    pdfBlock: PortablePdf,
   },
 };
 

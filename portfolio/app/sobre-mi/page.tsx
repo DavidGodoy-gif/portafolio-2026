@@ -14,6 +14,18 @@ const SOBRE_MI_QUERY = `
           ...,
           metadata { dimensions }
         }
+      },
+      _type == "pdfBlock" => {
+        ...,
+        file {
+          ...,
+          asset->{
+            url,
+            originalFilename,
+            mimeType,
+            size
+          }
+        }
       }
     }
   }
@@ -38,19 +50,21 @@ export default async function SobreMi() {
   const hasBlocks = Array.isArray(content) && content.length > 0;
 
   return (
-    <main className="px-8 py-8 md:px-24 md:py-32">
+    <main className="sobre-mi-page px-8 py-8 md:px-24 md:py-32">
       <div className="max-w-[800px] mx-auto text-left">
         <h1 className="text-4xl font-bold text-gradient-magenta-cyan">{title}</h1>
 
         {hasBlocks ? (
-          <section className="mt-16">
+          <section className="mb-8">
             <div className="case-title"></div>
-            <div>
+            <div className="sobre-mi-portable">
               <CasePortableContent value={content} />
             </div>
           </section>
         ) : (
-          <p className="mt-6 pt-6 text-neutral-400 leading-relaxed">{FALLBACK_PARAGRAPH}</p>
+          <div className="mt-16 pt-6 text-neutral-400 leading-relaxed">
+            <p>{FALLBACK_PARAGRAPH}</p>
+          </div>
         )}
       </div>
     </main>
