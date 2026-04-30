@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { motion, useInView } from "framer-motion";
-import { useRef, type CSSProperties } from "react";
+import { useEffect, useRef, useState, type CSSProperties } from "react";
 import { urlFor } from "@/lib/sanity";
 
 type PortableImageProps = {
@@ -13,6 +13,8 @@ type PortableImageProps = {
 export default function PortableImage({ value, index = 0 }: PortableImageProps) {
   const containerRef = useRef(null);
   const imageRef = useRef(null);
+  const scrollRef = useRef<HTMLDivElement>(null);
+  const [isMobile, setIsMobile] = useState(false);
   const isInView = useInView(imageRef, { amount: 0.1 });
 
   const dims = value?.asset?.metadata?.dimensions;
@@ -30,6 +32,36 @@ export default function PortableImage({ value, index = 0 }: PortableImageProps) 
 
   const bgVariants = ["bgsoft", "bgsoft-two", "bgsoft-three"];
   const bgClass = bgVariants[index % bgVariants.length];
+  const hiddenScale = isMobile ? 0.5 : 0.1;
+
+  useEffect(() => {
+    const updateViewport = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+
+    updateViewport();
+    window.addEventListener("resize", updateViewport);
+
+    return () => {
+      window.removeEventListener("resize", updateViewport);
+    };
+  }, []);
+
+  useEffect(() => {
+    if (!scrollRef.current) return;
+
+    const scroller = scrollRef.current;
+    const centerImage = () => {
+      scroller.scrollLeft = Math.max(0, (scroller.scrollWidth - scroller.clientWidth) / 2);
+    };
+
+    centerImage();
+    window.addEventListener("resize", centerImage);
+
+    return () => {
+      window.removeEventListener("resize", centerImage);
+    };
+  }, [isMobile, intrinsicW, intrinsicH]);
 
   return (
     <div
@@ -48,13 +80,13 @@ export default function PortableImage({ value, index = 0 }: PortableImageProps) 
         }
       >
       <figure className="my-8 flex w-full flex-col items-center">
-        <div className="w-full min-w-0 overflow-x-auto [-webkit-overflow-scrolling:touch] md:overflow-x-visible">
-          <div className="mx-auto flex w-max min-h-0 shrink-0 items-center justify-start md:w-full md:max-w-[1200px] md:justify-center">
+        <div ref={scrollRef} className="w-full min-w-0 overflow-x-auto [-webkit-overflow-scrolling:touch] md:overflow-x-visible">
+          <div className="mx-auto flex w-max min-h-0 shrink-0 items-center justify-center md:w-full md:max-w-[1200px] md:justify-center">
             <motion.div
               ref={imageRef}
-              initial={{ scale: 0.1 }}
-              animate={{ scale: isInView ? 1 : 0.1 }}
-              transition={{ duration: 0.5, ease: "easeOut" }}
+              initial={{ scale: hiddenScale }}
+              animate={{ scale: isInView ? 1 : hiddenScale }}
+              transition={{ duration: 1, ease: "easeOut" }}
               style={{ transformOrigin: "center center" }}
             >
               <Image
@@ -63,7 +95,7 @@ export default function PortableImage({ value, index = 0 }: PortableImageProps) 
                 width={intrinsicW}
                 height={intrinsicH}
                 sizes={`(max-width: 767px) ${intrinsicW}px, ${desktopW}px`}
-                className="h-auto max-w-none shrink-0 object-contain md:max-h-(--desktop-img-h) md:max-w-(--desktop-img-w) max-md:w-(--intrinsic-w)! max-md:min-w-(--intrinsic-w)! max-md:max-w-none!"
+                className="h-auto max-w-none shrink-0 object-contain md:max-h-(--desktop-img-h) md:max-w-(--desktop-img-w) max-md:w-(--intrinsic-w)! max-md:min-w-(--intrinsic-w)! max-md:max-w-none! max-md:max-h-[600px]"
               />
             </motion.div>
           </div>
