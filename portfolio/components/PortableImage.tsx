@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion, useInView } from "framer-motion";
 import { useRef, type CSSProperties } from "react";
 import { urlFor } from "@/lib/sanity";
 
@@ -11,15 +11,9 @@ type PortableImageProps = {
 };
 
 export default function PortableImage({ value, index = 0 }: PortableImageProps) {
-  const ref = useRef(null);
-
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ["0.1 1", "0.1 0"],
-  });
-
-  const opacity = useTransform(scrollYProgress, [0, 9], [0, 9]);
-  const y = useTransform(scrollYProgress, [0, 1], [20, 0]);
+  const containerRef = useRef(null);
+  const imageRef = useRef(null);
+  const isInView = useInView(imageRef, { amount: 0.1 });
 
   const dims = value?.asset?.metadata?.dimensions;
   const intrinsicW = dims?.width ?? 1200;
@@ -38,9 +32,8 @@ export default function PortableImage({ value, index = 0 }: PortableImageProps) 
   const bgClass = bgVariants[index % bgVariants.length];
 
   return (
-    <motion.div
-      ref={ref}
-      style={{ opacity, y }}
+    <div
+      ref={containerRef}
       className={`${bgClass} w-screen relative left-1/2 right-1/2 mt-4 -translate-x-1/2 overflow-x-visible overflow-y-hidden md:overflow-hidden bgmargin`}
     >
       <div
@@ -57,14 +50,22 @@ export default function PortableImage({ value, index = 0 }: PortableImageProps) 
       <figure className="my-8 flex w-full flex-col items-center">
         <div className="w-full min-w-0 overflow-x-auto [-webkit-overflow-scrolling:touch] md:overflow-x-visible">
           <div className="mx-auto flex w-max min-h-0 shrink-0 items-center justify-start md:w-full md:max-w-[1200px] md:justify-center">
-            <Image
-              src={imageUrl}
-              alt={value.alt || ""}
-              width={intrinsicW}
-              height={intrinsicH}
-              sizes={`(max-width: 767px) ${intrinsicW}px, ${desktopW}px`}
-              className="h-auto max-w-none shrink-0 object-contain md:max-h-(--desktop-img-h) md:max-w-(--desktop-img-w) max-md:w-(--intrinsic-w)! max-md:min-w-(--intrinsic-w)! max-md:max-w-none!"
-            />
+            <motion.div
+              ref={imageRef}
+              initial={{ scale: 0.1 }}
+              animate={{ scale: isInView ? 1 : 0.1 }}
+              transition={{ duration: 0.5, ease: "easeOut" }}
+              style={{ transformOrigin: "center center" }}
+            >
+              <Image
+                src={imageUrl}
+                alt={value.alt || ""}
+                width={intrinsicW}
+                height={intrinsicH}
+                sizes={`(max-width: 767px) ${intrinsicW}px, ${desktopW}px`}
+                className="h-auto max-w-none shrink-0 object-contain md:max-h-(--desktop-img-h) md:max-w-(--desktop-img-w) max-md:w-(--intrinsic-w)! max-md:min-w-(--intrinsic-w)! max-md:max-w-none!"
+              />
+            </motion.div>
           </div>
         </div>
         {value.caption && (
@@ -74,6 +75,6 @@ export default function PortableImage({ value, index = 0 }: PortableImageProps) 
         )}
       </figure>
       </div>
-    </motion.div>
+    </div>
   );
 }
