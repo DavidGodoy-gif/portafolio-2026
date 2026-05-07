@@ -21,8 +21,8 @@ export default function PortableImage({ value, index = 0 }: PortableImageProps) 
   const intrinsicW = dims?.width ?? 1200;
   const intrinsicH = dims?.height ?? Math.round((intrinsicW * 2) / 3);
 
-  const maxDesktopW = 1200;
-  const maxDesktopH = 800;
+  const maxDesktopW = 900;
+  const maxDesktopH = 500;
   const desktopScale = Math.min(1, maxDesktopW / intrinsicW, maxDesktopH / intrinsicH);
   const desktopW = Math.round(intrinsicW * desktopScale);
   const desktopH = Math.round(intrinsicH * desktopScale);
@@ -81,12 +81,12 @@ export default function PortableImage({ value, index = 0 }: PortableImageProps) 
       >
       <figure className="my-8 flex w-full flex-col items-center">
         <div ref={scrollRef} className="w-full min-w-0 overflow-x-auto [-webkit-overflow-scrolling:touch] md:overflow-x-visible">
-          <div className="mx-auto flex w-max min-h-0 shrink-0 items-center justify-center md:w-full md:max-w-[1200px] md:justify-center">
+          <div className="mx-auto flex w-max min-h-0 shrink-0 items-center justify-center md:w-full md:max-w-[1024px] md:justify-center">
             <motion.div
               ref={imageRef}
               initial={{ scale: hiddenScale }}
               animate={{ scale: isInView ? 1 : hiddenScale }}
-              transition={{ duration: 1, ease: "easeOut" }}
+              transition={{ duration: 0.3, ease: "easeOut" }}
               style={{ transformOrigin: "center center" }}
             >
               <Image
@@ -95,7 +95,7 @@ export default function PortableImage({ value, index = 0 }: PortableImageProps) 
                 width={intrinsicW}
                 height={intrinsicH}
                 sizes={`(max-width: 767px) ${intrinsicW}px, ${desktopW}px`}
-                className="h-auto max-w-none shrink-0 object-contain md:max-h-(--desktop-img-h) md:max-w-(--desktop-img-w) max-md:w-(--intrinsic-w)! max-md:min-w-(--intrinsic-w)! max-md:max-w-none! max-md:max-h-[600px]"
+                className="h-auto max-w-none shrink-0 object-contain md:max-h-(--desktop-img-h) md:max-w-(--desktop-img-w) max-md:w-full! max-md:min-w-0! max-md:max-w-[500px]! max-md:max-h-[600px]"
               />
             </motion.div>
           </div>

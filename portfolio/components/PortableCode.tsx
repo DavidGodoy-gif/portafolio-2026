@@ -17,6 +17,8 @@ type PortableCodeProps = {
 };
 
 let mermaidInitialized = false;
+const MERMAID_INITIAL_SCALE_BOOST = 1.35;
+const MERMAID_INITIAL_SCALE_MAX = 2.25;
 
 function initMermaid() {
   if (mermaidInitialized) return;
@@ -100,7 +102,10 @@ function MermaidDiagram({ code }: { code: string }) {
           if (svgWidth > 0 && svgHeight > 0 && containerWidth > 0 && containerHeight > 0) {
             const scaleX = containerWidth / svgWidth;
             const scaleY = containerHeight / svgHeight;
-            const fit = Math.min(Math.min(scaleX, scaleY) * 0.9, 1);
+            const fit = Math.min(
+              Math.min(scaleX, scaleY) * MERMAID_INITIAL_SCALE_BOOST,
+              MERMAID_INITIAL_SCALE_MAX,
+            );
             fitScaleRef.current = fit;
 
             const applyCenterWhenReady = (attempt = 0) => {
