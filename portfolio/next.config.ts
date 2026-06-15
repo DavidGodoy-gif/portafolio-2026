@@ -1,3 +1,4 @@
+import "./lib/trust-system-ca";
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {

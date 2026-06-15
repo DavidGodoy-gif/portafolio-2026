@@ -21,7 +21,7 @@ export default function CaseCard({
   return (
     <Link
       href={`/casos/${slug}`}
-      className="group block overflow-hidden rounded-md transition hover:border-neutral-700 shadow-md alink"
+      className="group block overflow-hidden rounded-md transition hover:border-neutral-700 shadow-lg alink bg-gray-900"
     >
       {imageUrl && (
         <div className="relative aspect-16/10 overflow-hidden">

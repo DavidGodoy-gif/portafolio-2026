@@ -16,7 +16,7 @@ body {
   font-family: "Figtree", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   color: var(--color-gray-400);
   overflow-x: hidden;
-  background: var(--color-gray-900);
+  background: linear-gradient(140deg,rgba(2, 47, 65, 1) 0%, rgba(16, 24, 40, 1) 50%, rgba(50, 1, 34, 1) 100%);
 }
 
 .text-gradient-magenta-cyan {

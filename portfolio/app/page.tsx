@@ -30,7 +30,7 @@ export default async function Home() {
 
       <section className="mt-24">
       <div className="flex items-center justify-between gap-4 mb-8">
-        <h2 className="text-3xl font-bold titlecase">Casos destacados</h2>
+        <h2 className="text-3xl font-bold titlecase">Productos destacados</h2>
 
         <a
           href="/casos"
