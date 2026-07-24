@@ -1,6 +1,25 @@
 import "./globals.css";
 import { Footer } from "@/components/Footer";
 import { HeaderNav } from "@/components/HeaderNav";
+import localFont from "next/font/local";
+
+const figtree = localFont({
+  src: [
+    { path: "./fonts/Figtree-Regular.ttf", weight: "400", style: "normal" },
+    { path: "./fonts/Figtree-Bold.ttf", weight: "700", style: "normal" },
+  ],
+  variable: "--font-figtree",
+  display: "swap",
+});
+
+const inter = localFont({
+  src: [
+    { path: "./fonts/Inter-Regular.ttf", weight: "400", style: "normal" },
+    { path: "./fonts/Inter-Bold.ttf", weight: "700", style: "normal" },
+  ],
+  variable: "--font-inter",
+  display: "swap",
+});
 
 export const metadata = {
   title: "David Godoy — UX + Frontend",
@@ -14,7 +33,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="es">
-      <body className="bg-white text-black">
+      <body className={`${figtree.variable} ${inter.variable} bg-white text-black`}>
 
       <header className="fixed top-0 left-0 right-0 z-110 flex justify-between items-center px-6 py-6 md:px-16 backdrop-blur border-gray-200">
         <a href="/">

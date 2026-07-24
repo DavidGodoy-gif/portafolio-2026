@@ -13,10 +13,10 @@
 }
 
 body {
-  font-family: "Figtree", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-family: var(--font-figtree), system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   color: var(--color-gray-400);
   overflow-x: hidden;
-  background: linear-gradient(140deg,rgba(2, 47, 65, 1) 0%, rgba(16, 24, 40, 1) 50%, rgba(50, 1, 34, 1) 100%);
+  background: linear-gradient(138deg, #032330 1.35%, #101828 50.87%, #370125 100.59%);
 }
 
 .text-gradient-magenta-cyan {
@@ -25,6 +25,102 @@ body {
   background-clip: text;
   color: transparent;
 }
+
+/* Card visual con borde vertical: slate-400 arriba → slate-900 abajo. */
+.case-card.alink {
+  position: relative;
+  display: flex;
+  height: 277px;
+  width: 100%;
+  margin: 0;
+  flex-direction: column;
+  overflow: hidden;
+  border: 1px solid transparent;
+  border-radius: 16px;
+  background:
+    linear-gradient(#1f2937, #1f2937) padding-box,
+    linear-gradient(to bottom, #94a3b8 0%, #0f172a 100%) border-box;
+  box-shadow: 0 4px 4px rgb(0 0 0 / 25%);
+}
+
+.case-card-media {
+  position: relative;
+  height: 200px;
+  flex: 0 0 200px;
+  overflow: hidden;
+}
+
+.case-card-summary {
+  display: flex;
+  height: 77px;
+  align-items: center;
+  padding: 24px;
+  background: #101828;
+}
+
+.case-card h3 {
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  margin: 0;
+  color: #99a1af;
+  font-family: var(--font-inter), system-ui, sans-serif;
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 1.08;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-inter), system-ui, sans-serif;
+}
+
+/* El detalle entra desde la base de la card en hover o foco. */
+.case-card-hover {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  color: white;
+  background: rgb(0 0 0 / 78%);
+  backdrop-filter: blur(5px);
+  transform: translateY(100%);
+  transition: transform 260ms ease-out;
+  will-change: transform;
+}
+
+.case-card-hover > div {
+  width: min(283px, 100%);
+}
+
+.case-card-hover h3 {
+  color: white;
+}
+
+/* Descripción breve: máximo tres líneas dentro del overlay. */
+.case-card-hover p {
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  margin-top: 10px;
+  color: white;
+  font-size: 14px;
+  line-height: 1.15;
+}
+
+.case-card:hover .case-card-hover,
+.case-card:focus-visible .case-card-hover {
+  transform: translateY(0);
+}
+
 
 h2 {
   color: var(--cyan);
