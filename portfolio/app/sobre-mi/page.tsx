@@ -50,8 +50,8 @@ export default async function SobreMi() {
   const hasBlocks = Array.isArray(content) && content.length > 0;
 
   return (
-    <main className="sobre-mi-page px-8 py-8 md:px-24 md:py-32">
-      <div className="max-w-[800px] mx-auto text-left">
+    <main className="sobre-mi-page mx-auto w-full max-w-[1200px] px-6 py-12 md:px-8 md:py-32">
+      <div className="w-full text-left">
         <h1 className="text-4xl font-bold text-gradient-magenta-cyan">{title}</h1>
 
         {hasBlocks ? (

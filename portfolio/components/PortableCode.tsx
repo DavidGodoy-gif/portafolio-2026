@@ -26,14 +26,14 @@ function initMermaid() {
     startOnLoad: false,
     theme: "base",
     themeVariables: {
-      background: "#101828",
-      primaryColor: "#101828",
-      primaryTextColor: "#99A1AF",
-      primaryBorderColor: "#5B4FAC",
-      lineColor: "#660c54",
+      background: "#18181b",
+      primaryColor: "#18181b",
+      primaryTextColor: "#00aeef",
+      primaryBorderColor: "#d00084",
+      lineColor: "#6b5bd2",
       secondaryColor: "#302856",
       tertiaryColor: "#321339",
-      fontSize: "20px",
+      fontSize: "16px",
       fontFamily: "Inter, sans-serif",
     },
   });
@@ -142,18 +142,18 @@ function MermaidDiagram({ code }: { code: string }) {
   if (!mounted) {
     return (
       <div
-        className="flex h-[400px] flex-col overflow-hidden rounded-2xl border codetheme md:h-[600px]"
+        className="flex min-h-[300px] flex-1 flex-col overflow-hidden"
         role="status"
         aria-label="Cargando diagrama"
       >
-        <div className="h-[49px] shrink-0 border-b codetheme" />
+        <div className="h-[42px] shrink-0 codetheme" />
         <div className="min-h-0 flex-1 animate-pulse bg-neutral-800/15" />
       </div>
     );
   }
 
   return (
-    <div className="flex h-[400px] flex-col overflow-hidden rounded-2xl border codetheme md:h-[600px]">
+    <div className="flex min-h-[300px] flex-1 flex-col overflow-hidden codetheme">
       <TransformWrapper
         initialScale={1}
         minScale={0.15}
@@ -166,7 +166,7 @@ function MermaidDiagram({ code }: { code: string }) {
           const { zoomIn, zoomOut } = controls;
           return (
           <>
-            <div className="flex shrink-0 gap-2 border-b px-4 py-3 codetheme">
+            <div className="flex shrink-0 gap-2 px-2 py-2 codetheme">
               <button
                 type="button"
                 onClick={() => zoomIn()}
@@ -236,19 +236,19 @@ export default function PortableCode({ value }: PortableCodeProps) {
   if (!value?.code) return null;
 
   return (
-    <section className="my-12">
+    <section className="my-0 flex min-h-[390px] max-h-[500px] w-full flex-col overflow-hidden rounded-[14px] bg-zinc-900 p-5">
       {value.title && (
-        <h3 className="text-xl font-semibold mb-4">{value.title}</h3>
+        <h3 className="m-0 mb-3 text-center text-base font-semibold text-[#d00084]">{value.title}</h3>
       )}
 
       {isMermaid ? (
         <MermaidDiagram key={value.code} code={value.code} />
       ) : (
-        <div className="overflow-hidden rounded-2xl border codetheme min-h-[300px] w-full">
+        <div className="flex min-h-0 w-full flex-1 flex-col overflow-hidden codetheme">
           <div className="flex items-center justify-between border-b border-neutral-800 px-4 py-2 text-xs uppercase tracking-wide text-neutral-500">
             <span>{value.language || "code"}</span>
           </div>
-          <pre className="overflow-auto h-full p-4 text-sm text-neutral-200">
+          <pre className="portable-code-scroll min-h-0 flex-1 overflow-auto p-4 text-sm text-neutral-200">
             <code>{value.code}</code>
           </pre>
         </div>

@@ -51,8 +51,8 @@ export default async function Caso({
 
   if (!caso) {
     return (
-      <main className="px-8 py-8 md:px-24 md:py-32">
-        <div className="max-w-[800px] mx-auto text-left">
+      <main className="mx-auto w-full max-w-[1200px] px-6 py-12 md:px-8 md:py-32">
+        <div className="w-full text-left">
           <h1 className="text-3xl font-bold">Caso no encontrado</h1>
         </div>
       </main>
@@ -60,26 +60,27 @@ export default async function Caso({
   }
 
   return (
-    <main className="px-8 py-8 md:px-24 md:py-32">
-      <div className="max-w-[800px] mx-auto text-left">
-        <h1 className="text-4xl font-bold text-gradient-magenta-cyan">
-          {caso.title}
-        </h1>
-
-        <div className="mt-6 mb-6 flex flex-col md:flex-row md:items-start md:gap-8">
-          <p className="md:w-1/2">{caso.problem}</p>
+    <main className="mx-auto w-full max-w-[1200px] px-6 py-12 md:px-8 md:py-32">
+      <div className="w-full text-left">
+        <section className={`case-detail-hero${imageUrl ? "" : " case-detail-hero-without-media"}`}>
+          <div className="case-detail-hero-copy">
+            <h1 className="text-gradient-magenta-cyan">{caso.title}</h1>
+            <p>{caso.problem}</p>
+          </div>
 
           {imageUrl && (
-            <div className="md:h-[250px] md:w-[250px] h-[150px] w-[150px] relative overflow-hidden rounded-full md:mt-0 mt-4 mx-auto fade-in-up">
+            <div className="case-detail-hero-media fade-in-up">
               <Image
                 src={imageUrl}
                 alt={alt}
                 fill
                 className="object-cover"
+                sizes="(max-width: 767px) 100vw, 50vw"
+                priority
               />
             </div>
           )}
-        </div>
+        </section>
 
         {caso.process && (
           <section className="mt-16">

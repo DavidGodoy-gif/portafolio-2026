@@ -67,7 +67,7 @@ export default function MetricsChart({ data }: any) {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.6 }}
-      className="mt-20 h-64"
+      className="min-h-[280px] w-full flex-1"
     >
       <ResponsiveContainer width="100%" height="100%">
         <BarChart data={animatedData}>
@@ -75,18 +75,24 @@ export default function MetricsChart({ data }: any) {
             <linearGradient
               id="magentaCyanGradient"
               x1="0"
-              y1="0"
-              x2="1"
+              y1="1"
+              x2="0"
               y2="0"
-              gradientTransform="rotate(45)"
             >
               <stop offset="0%" stopColor="var(--cyan)" />
-              <stop offset="100%" stopColor="var(--purple)" />
+              <stop offset="100%" stopColor="var(--magenta)" />
             </linearGradient>
           </defs>
-          <XAxis dataKey="label" />
-          <Tooltip />
-          <Bar dataKey="value" fill="url(#magentaCyanGradient)" />
+          <XAxis
+            dataKey="label"
+            axisLine={{ stroke: "#94a3b8" }}
+            tickLine={false}
+            tick={{ fill: "#94a3b8", fontSize: 13 }}
+          />
+          <Tooltip
+            contentStyle={{ background: "#18181b", border: "1px solid #334155", borderRadius: 8 }}
+          />
+          <Bar dataKey="value" fill="url(#magentaCyanGradient)" radius={[18, 18, 0, 0]} />
         </BarChart>
       </ResponsiveContainer>
     </motion.div>

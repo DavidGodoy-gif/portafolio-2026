@@ -10,7 +10,7 @@ type PortableImageProps = {
   index?: number;
 };
 
-export default function PortableImage({ value, index = 0 }: PortableImageProps) {
+export default function PortableImage({ value }: PortableImageProps) {
   const containerRef = useRef(null);
   const imageRef = useRef(null);
   const scrollRef = useRef<HTMLDivElement>(null);
@@ -30,8 +30,6 @@ export default function PortableImage({ value, index = 0 }: PortableImageProps) 
   const sanityW = Math.min(2400, Math.max(320, intrinsicW * 2));
   const imageUrl = urlFor(value).width(sanityW).fit("max").url();
 
-  const bgVariants = ["bgsoft", "bgsoft-two", "bgsoft-three"];
-  const bgClass = bgVariants[index % bgVariants.length];
   const hiddenScale = isMobile ? 0.5 : 0.1;
 
   useEffect(() => {
@@ -66,7 +64,7 @@ export default function PortableImage({ value, index = 0 }: PortableImageProps) 
   return (
     <div
       ref={containerRef}
-      className={`${bgClass} w-screen relative left-1/2 right-1/2 mt-4 -translate-x-1/2 overflow-x-visible overflow-y-hidden md:overflow-hidden bgmargin`}
+      className="portable-image-card relative mt-0 w-full overflow-hidden rounded-[14px] bg-[#18181b] bgmargin"
     >
       <div
         className="w-full"
@@ -79,11 +77,12 @@ export default function PortableImage({ value, index = 0 }: PortableImageProps) 
           } as CSSProperties
         }
       >
-      <figure className="my-8 flex w-full flex-col items-center">
-        <div ref={scrollRef} className="w-full min-w-0 overflow-x-auto [-webkit-overflow-scrolling:touch] md:overflow-x-visible">
-          <div className="mx-auto flex w-max min-h-0 shrink-0 items-center justify-center md:w-full md:max-w-[1024px] md:justify-center">
+      <figure className="my-0 flex h-full w-full flex-col items-stretch">
+        <div ref={scrollRef} className="w-full min-w-0 overflow-hidden bg-white">
+          <div className="mx-auto flex min-h-0 w-full items-center justify-center">
             <motion.div
               ref={imageRef}
+              className="w-full"
               initial={{ scale: hiddenScale }}
               animate={{ scale: isInView ? 1 : hiddenScale }}
               transition={{ duration: 0.3, ease: "easeOut" }}
@@ -95,13 +94,13 @@ export default function PortableImage({ value, index = 0 }: PortableImageProps) 
                 width={intrinsicW}
                 height={intrinsicH}
                 sizes={`(max-width: 767px) ${intrinsicW}px, ${desktopW}px`}
-                className="h-auto max-w-none shrink-0 object-contain md:max-h-(--desktop-img-h) md:max-w-(--desktop-img-w) max-md:w-full! max-md:min-w-0! max-md:max-w-[500px]! max-md:max-h-[600px]"
+                className="h-auto w-full max-w-full object-contain"
               />
             </motion.div>
           </div>
         </div>
         {value.caption && (
-          <figcaption className="mt-4 mb-6 px-5 text-sm italic max-w-[1200px] w-full text-center">
+          <figcaption className="m-0 flex min-h-12 w-full items-center justify-center bg-[#18181b] px-5 py-3 text-center text-xs font-normal not-italic text-white">
             {value.caption}
           </figcaption>
         )}

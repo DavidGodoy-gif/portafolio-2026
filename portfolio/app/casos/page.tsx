@@ -18,11 +18,11 @@ export default async function Casos() {
   const casos = await getCasos();
 
   return (
-    <main className="px-16 py-24 max-w-[1200px] mx-auto">
+    <main className="mx-auto w-full max-w-[1200px] px-6 py-24 md:px-8">
       <h1 className="text-6xl font-bold mb-12 text-gradient-magenta-cyan">Productos</h1>
       <div className="case-title mb-8"></div>
 
-      <div className="grid gap-8 md:grid-cols-2">
+      <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
         {casos.map((caso: any) => (
           <CaseCard
             key={caso.slug}
