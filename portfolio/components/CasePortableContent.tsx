@@ -12,8 +12,8 @@ const styles = {
   h2: {
     fontSize: "1.25rem",
     fontWeight: "bold",
-    marginTop: "0",
-    marginBottom: "1.75rem",
+    marginTop: "0.5rem",
+    marginBottom: "0.5rem",
   },
   h3: {
     fontSize: "0.875rem",

@@ -12,9 +12,10 @@ type PortableImageProps = {
 
 export default function PortableImage({ value }: PortableImageProps) {
   const containerRef = useRef(null);
-  const imageRef = useRef(null);
+  const imageRef = useRef<HTMLDivElement>(null);
   const scrollRef = useRef<HTMLDivElement>(null);
   const [isMobile, setIsMobile] = useState(false);
+  const [shouldCenterImage, setShouldCenterImage] = useState(false);
   const isInView = useInView(imageRef, { amount: 0.1 });
 
   const dims = value?.asset?.metadata?.dimensions;
@@ -77,8 +78,13 @@ export default function PortableImage({ value }: PortableImageProps) {
           } as CSSProperties
         }
       >
-      <figure className="my-0 flex h-full w-full flex-col items-stretch">
-        <div ref={scrollRef} className="w-full min-w-0 overflow-hidden bg-white">
+      <figure
+        className={`my-0 flex h-full w-full flex-col items-stretch ${shouldCenterImage ? "justify-center" : ""}`}
+      >
+        <div
+          ref={scrollRef}
+          className="w-full min-w-0 overflow-hidden"
+        >
           <div className="mx-auto flex min-h-0 w-full items-center justify-center">
             <motion.div
               ref={imageRef}
@@ -95,6 +101,11 @@ export default function PortableImage({ value }: PortableImageProps) {
                 height={intrinsicH}
                 sizes={`(max-width: 767px) ${intrinsicW}px, ${desktopW}px`}
                 className="h-auto w-full max-w-full object-contain"
+                onLoad={(event) => {
+                  setShouldCenterImage(
+                    event.currentTarget.offsetHeight < 200,
+                  );
+                }}
               />
             </motion.div>
           </div>
