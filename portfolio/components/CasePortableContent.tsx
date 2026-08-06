@@ -110,7 +110,10 @@ export default function CasePortableContent({ value }: { value: unknown[] }) {
 
         if (group.kind === "text") {
           return (
-            <section key={key} className="portable-text-container">
+            <section
+              key={key}
+              className="portable-text-container border border-slate-800"
+            >
               <PortableText value={group.blocks} components={components} />
             </section>
           );
