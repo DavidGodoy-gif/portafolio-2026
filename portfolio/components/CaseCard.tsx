@@ -6,7 +6,10 @@ type CaseCardProps = {
   title: string;
   slug: string;
   excerpt?: string;
-  thumbnail?: any;
+  thumbnail?: {
+    alt?: string;
+    asset?: unknown;
+  };
 };
 
 export default function CaseCard({
@@ -41,7 +44,7 @@ export default function CaseCard({
         )}
       </div>
 
-      <div className="case-card-summary">
+      <div className="case-card-summary" style={{ backgroundColor: "#18181b" }}>
         <h3>{title}</h3>
       </div>
 
