@@ -66,7 +66,10 @@ export function SkillsSection({categories}: SkillsSectionProps) {
             >
               <div className="flex items-center gap-4">
                 <Icon aria-hidden className="h-8 w-8 shrink-0" style={{color: accent}} />
-                <h3 className="m-0 text-base font-bold" style={{color: accent}}>
+                <h3
+                  className="m-0 text-base font-bold"
+                  style={{color: accent, margin: 0}}
+                >
                   {category.title}
                 </h3>
               </div>
