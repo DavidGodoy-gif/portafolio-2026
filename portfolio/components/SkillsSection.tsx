@@ -2,7 +2,6 @@
 
 import {useState} from "react";
 import {Box, ChevronDown, Code2, PenTool, Search, type LucideIcon} from "lucide-react";
-import {motion, useReducedMotion} from "framer-motion";
 import type {SkillCategory, SkillIconName} from "@/types/skill";
 
 type SkillsSectionProps = {
@@ -39,18 +38,13 @@ function SkillContent({category}: {category: SkillCategory}) {
 
 export function SkillsSection({categories}: SkillsSectionProps) {
   const [expanded, setExpanded] = useState<string | null>(null);
-  const reduceMotion = useReducedMotion();
 
   if (!categories.length) return null;
 
   return (
-    <motion.section
+    <section
       aria-labelledby="skills-title"
       className="home-skills mt-10"
-      initial={reduceMotion ? false : {opacity: 0, y: 20}}
-      whileInView={reduceMotion ? undefined : {opacity: 1, y: 0}}
-      viewport={{once: true, amount: 0.2}}
-      transition={{duration: 0.45, ease: "easeOut"}}
     >
       <h2 id="skills-title" className="home-section-label">Skills</h2>
 
@@ -113,6 +107,6 @@ export function SkillsSection({categories}: SkillsSectionProps) {
           );
         })}
       </div>
-    </motion.section>
+    </section>
   );
 }
