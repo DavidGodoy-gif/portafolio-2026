@@ -45,7 +45,7 @@ export function HeaderNav() {
 
       <button
         type="button"
-        className="md:hidden inline-flex h-10 w-10 items-center justify-center rounded-md text-gray-400 hover:bg-white/10"
+        className="md:hidden inline-flex h-10 w-10 items-center justify-center rounded-md text-zinc-200 hover:bg-white/10"
         onClick={() => setOpen((v) => !v)}
         aria-expanded={open}
         aria-controls="mobile-menu"

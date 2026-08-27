@@ -3,9 +3,9 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
-  --magenta: #BA007C;
+  --magenta: #FF19B2;
   --cyan: #009BDB;
-  --purple: #5C4FAC;
+  --purple: #9585FF;
   --magenta20: #321339;
   --cyan20: #0d324c;
   --purple20: #302856;
@@ -14,7 +14,7 @@
 
 body {
   font-family: var(--font-figtree), system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  color: var(--color-gray-400);
+  color: var(--color-zinc-200);
   overflow-x: hidden;
   background: linear-gradient(138deg, #032330 1.35%, #101828 50.87%, #370125 100.59%);
 }
@@ -212,7 +212,6 @@ main.sobre-mi-page .sobre-mi-portable .bgmargin {
   border: 1px solid #1e293b;
   border-radius: 14px;
   background: #18181b;
-  color: #94a3b8;
   font-size: 13px;
   line-height: 1.35;
 }
@@ -384,7 +383,7 @@ strong, b {
 
 header {
   a {
-    color: var(--color-gray-400);
+    color: var(--color-zinc-200);
     border: none;
   }
 }
@@ -553,7 +552,7 @@ a.home-about-link:hover {
   top: -20px;
   left: 100%;
   background: var(--color-gray-950);
-  color: var(--color-gray-400);
+  color: var(--color-zinc-200);
   border-radius: 3vb;
   padding: 1vb;
   display: block;
