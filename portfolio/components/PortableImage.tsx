@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { motion, useInView } from "framer-motion";
+import MediaReveal from './MediaReveal';
 import { useEffect, useRef, useState, type CSSProperties } from "react";
 import { urlFor } from "@/lib/sanity";
 
@@ -12,11 +12,9 @@ type PortableImageProps = {
 
 export default function PortableImage({ value }: PortableImageProps) {
   const containerRef = useRef(null);
-  const imageRef = useRef<HTMLDivElement>(null);
   const scrollRef = useRef<HTMLDivElement>(null);
   const [isMobile, setIsMobile] = useState(false);
   const [shouldCenterImage, setShouldCenterImage] = useState(false);
-  const isInView = useInView(imageRef, { amount: 0.1 });
 
   const dims = value?.asset?.metadata?.dimensions;
   const intrinsicW = dims?.width ?? 1200;
@@ -31,7 +29,6 @@ export default function PortableImage({ value }: PortableImageProps) {
   const sanityW = Math.min(2400, Math.max(320, intrinsicW * 2));
   const imageUrl = urlFor(value).width(sanityW).fit("max").url();
 
-  const hiddenScale = isMobile ? 0.5 : 0.1;
 
   useEffect(() => {
     const updateViewport = () => {
@@ -86,13 +83,8 @@ export default function PortableImage({ value }: PortableImageProps) {
           className="w-full min-w-0 overflow-hidden"
         >
           <div className="mx-auto flex min-h-0 w-full items-center justify-center">
-            <motion.div
-              ref={imageRef}
+            <MediaReveal
               className="w-full"
-              initial={{ scale: hiddenScale }}
-              animate={{ scale: isInView ? 1 : hiddenScale }}
-              transition={{ duration: 0.3, ease: "easeOut" }}
-              style={{ transformOrigin: "center center" }}
             >
               <Image
                 src={imageUrl}
@@ -107,7 +99,7 @@ export default function PortableImage({ value }: PortableImageProps) {
                   );
                 }}
               />
-            </motion.div>
+            </MediaReveal>
           </div>
         </div>
         {value.caption && (

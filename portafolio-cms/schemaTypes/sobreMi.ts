@@ -1,10 +1,12 @@
 import portableBodyBlocks from "./portableBodyBlocks";
+import aboutPresentation from './aboutPresentation';
 
 export default {
   name: "sobreMi",
   title: "Sobre mí",
   type: "document",
   fields: [
+    aboutPresentation,
     {
       name: "title",
       title: "Título de la página",

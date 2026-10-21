@@ -1,6 +1,10 @@
 "use client";
 
-import { PortableText } from "@portabletext/react";
+import { PortableText, type PortableTextComponents } from "@portabletext/react";
+import Image from 'next/image';
+import MediaReveal from './MediaReveal';
+import {urlFor} from '@/lib/sanity';
+import {caseBlocks, headingId} from '@/lib/case-content';
 import PortableImage from "@/components/PortableImage";
 import PortableChart from "@/components/PortableChart";
 import PortableTable from "@/components/PortableTable";
@@ -91,8 +95,38 @@ function groupContent(blocks: PortableBlock[]): ContentGroup[] {
   }, []);
 }
 
-export default function CasePortableContent({ value }: { value: unknown[] }) {
+const articleComponents: PortableTextComponents = {
+  ...components,
+  block: Object.fromEntries(['h1','h2','h3','h4','h5','h6'].map(style => [style, ({value,children}) => {
+    const Tag = (style === 'h1' ? 'h2' : style) as 'h2'|'h3'|'h4'|'h5'|'h6';
+    return <Tag id={headingId(value)}>{children}</Tag>;
+  }])),
+  list: {
+    bullet: ({children}) => <ul>{children}</ul>,
+    number: ({children}) => <ol>{children}</ol>,
+  },
+  listItem: {
+    bullet: ({children}) => <li>{children}</li>,
+    number: ({children}) => <li>{children}</li>,
+  },
+  marks: {
+    link: ({value,children}) => <a href={value?.href}>{children}</a>,
+  },
+  types: {
+    ...components.types,
+    image: ({value}) => {
+      if(!value.asset)return null;
+      const dimensions = value.asset.metadata?.dimensions;
+      const url = urlFor(value).width(1800).auto('format').url();
+      return <figure className="case-image"><a href={url} target="_blank" rel="noreferrer" aria-label={value.alt ? `Ampliar: ${value.alt}` : 'Ampliar imagen del caso'}><MediaReveal><Image src={url} alt={value.alt || ''} width={dimensions?.width || 1200} height={dimensions?.height || 800} sizes="(min-width: 1200px) 920px, 100vw" /></MediaReveal></a>{value.caption && <figcaption>{value.caption}</figcaption>}</figure>;
+    },
+  },
+};
+
+export default function CasePortableContent({ value, layout = 'cards' }: { value: unknown[]; layout?: 'cards'|'article' }) {
   if (!Array.isArray(value) || value.length === 0) return null;
+
+  if (layout === 'article') return <div className="case-prose"><PortableText value={caseBlocks(value)} components={articleComponents} /></div>;
 
   const blocks = value.filter(
     (block): block is PortableBlock =>

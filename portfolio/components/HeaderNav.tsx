@@ -1,114 +1,16 @@
-"use client";
-
-import Link from "next/link";
-import { useEffect, useState } from "react";
-import { createPortal } from "react-dom";
-
-const links = [
-  { href: "/", label: "Inicio" },
-  { href: "/casos", label: "Productos" },
-  { href: "/sobre-mi", label: "Sobre mí" },
-] as const;
-
+'use client'
+import Link from 'next/link'
+import {useRef, useState} from 'react'
+import {usePathname} from 'next/navigation'
+const links = [{href:'/#trabajo',label:'Trabajo'},{href:'/sobre-mi',label:'Sobre mí'},{href:'/#contacto',label:'Contacto'}]
 export function HeaderNav() {
-  const [open, setOpen] = useState(false);
-
-  useEffect(() => {
-    if (!open) return;
-    const prev = document.body.style.overflow;
-    document.body.style.overflow = "hidden";
-    return () => {
-      document.body.style.overflow = prev;
-    };
-  }, [open]);
-
-  useEffect(() => {
-    const onKey = (e: KeyboardEvent) => {
-      if (e.key === "Escape") setOpen(false);
-    };
-    window.addEventListener("keydown", onKey);
-    return () => window.removeEventListener("keydown", onKey);
-  }, []);
-
-  return (
-    <>
-      <nav
-        className="hidden md:flex items-center gap-6 text-sm"
-        aria-label="Principal"
-      >
-        {links.map(({ href, label }) => (
-          <Link key={href} href={href}>
-            {label}
-          </Link>
-        ))}
-      </nav>
-
-      <button
-        type="button"
-        className="md:hidden inline-flex h-10 w-10 items-center justify-center rounded-md text-zinc-200 hover:bg-white/10"
-        onClick={() => setOpen((v) => !v)}
-        aria-expanded={open}
-        aria-controls="mobile-menu"
-        aria-label={open ? "Cerrar menú" : "Abrir menú"}
-      >
-        {open ? (
-          <svg
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            aria-hidden
-          >
-            <path d="M18 6L6 18M6 6l12 12" />
-          </svg>
-        ) : (
-          <svg
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            aria-hidden
-          >
-            <path d="M4 7h16M4 12h16M4 17h16" />
-          </svg>
-        )}
-      </button>
-
-      {open &&
-        createPortal(
-          <div
-            id="mobile-menu"
-            className="fixed inset-0 z-100 flex min-h-dvh w-full flex-col items-center justify-center bg-black/40 px-6 backdrop-blur-xl md:hidden"
-            role="dialog"
-            aria-modal="true"
-            aria-label="Menú de navegación"
-            onClick={() => setOpen(false)}
-          >
-            <nav
-              className="flex flex-col items-center justify-center gap-10 text-center text-lg "
-              aria-label="Principal"
-              onClick={(e) => e.stopPropagation()}
-            >
-              {links.map(({ href, label }) => (
-                <Link
-                  key={href}
-                  href={href}
-                  className="min-w-48 py-3 bglink"
-                  onClick={() => setOpen(false)}
-                >
-                  {label}
-                </Link>
-              ))}
-            </nav>
-          </div>,
-          document.body
-        )}
-    </>
-  );
+  const [open,setOpen] = useState(false)
+  const button = useRef<HTMLButtonElement>(null)
+  const path = usePathname()
+  const href = (value: string) => path === '/' && value.startsWith('/#') ? value.slice(1) : value
+  return <div className="header-navigation" onKeyDown={e=>{if(e.key==='Escape'){setOpen(false);button.current?.focus()}}} onBlur={e=>{if(!e.currentTarget.contains(e.relatedTarget))setOpen(false)}}>
+    <nav className="hidden md:flex items-center gap-8" aria-label="Principal">{links.map(l=><Link key={l.href} href={href(l.href)}>{l.label}</Link>)}</nav>
+    <button ref={button} type="button" className="md:hidden inline-flex h-11 w-11 items-center justify-center text-zinc-100" aria-label={open?'Cerrar menú':'Abrir menú'} aria-expanded={open} aria-controls="mobile-menu" onClick={()=>setOpen(!open)}><svg width="28" height="28" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.5" fill="none" aria-hidden="true"><path d={open?'M5 5l14 14M5 19L19 5':'M3 6h18M3 12h18M3 18h18'} /></svg></button>
+    {open && <nav id="mobile-menu" className="mobile-navigation md:hidden" aria-label="Principal móvil">{links.map(l=><Link key={l.href} href={href(l.href)} onClick={()=>setOpen(false)}>{l.label}</Link>)}</nav>}
+  </div>
 }

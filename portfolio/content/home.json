@@ -1,0 +1,114 @@
+{
+  "_id": "home",
+  "_type": "home",
+  "identity": "David Godoy · Senior Product Designer",
+  "headline": "Diseño productos digitales para resolver problemas complejos",
+  "headlineAccent": "con claridad.",
+  "description": "Combino investigación, diseño de interacción y conocimiento frontend para conectar las necesidades de las personas con soluciones viables y cuidar la experiencia hasta su implementación.",
+  "differentiator": "Frontend / UX Engineering como diferenciador.",
+  "primaryLabel": "Ver trabajo seleccionado",
+  "aboutLabel": "Sobre mí",
+  "workLabel": "Trabajo",
+  "workTitle": "Trabajo seleccionado",
+  "workIntro": "Tres proyectos de producto: acceso digital, búsqueda de información y comprensión del ahorro previsional.",
+  "projects": [
+    {
+      "_key": "login",
+      "_type": "homeProject",
+      "case": {
+        "_type": "reference",
+        "_ref": "7ab54fe5-5b26-40b1-a1cc-761b4e764e8f"
+      },
+      "title": "Login y Cambio de Clave",
+      "context": "AFP Modelo · Acceso digital",
+      "summary": "Una experiencia de acceso y recuperación más clara.",
+      "description": "Rediseñé los flujos de autenticación y recuperación a partir de investigación y pruebas con usuarios. Participé en la implementación frontend y el análisis posterior al lanzamiento para orientar nuevas mejoras.",
+      "contribution": "Investigación · Product Design · Frontend · Seguimiento",
+      "linkLabel": "Ver caso de Login y Cambio de Clave"
+    },
+    {
+      "_key": "search",
+      "_type": "homeProject",
+      "case": {
+        "_type": "reference",
+        "_ref": "9bb0130f-831c-4d87-af21-b56f960085ad"
+      },
+      "title": "Buscador AFP Modelo",
+      "context": "AFP Modelo · Búsqueda de información",
+      "summary": "Encontrar información dentro de un ecosistema de contenidos.",
+      "description": "Diseñé e implementé una búsqueda guiada con sugerencias, categorías y resultados priorizados, integrada al gestor de contenidos del sitio.",
+      "contribution": "Investigación · Arquitectura de información · Diseño · Frontend",
+      "linkLabel": "Ver caso del Buscador"
+    },
+    {
+      "_key": "apv",
+      "_type": "homeProject",
+      "case": {
+        "_type": "reference",
+        "_ref": "969f10d0-d2ce-498b-b6df-146517983058"
+      },
+      "title": "Herramienta interactiva de APV",
+      "context": "AFP Modelo · Ahorro previsional",
+      "summary": "Hacer visible el valor del ahorro futuro.",
+      "description": "Diseñé una experiencia de simulación y comparación de escenarios para ayudar a comprender cómo el ahorro voluntario puede influir en la pensión futura.",
+      "contribution": "Investigación · Product Design · Arquitectura de información",
+      "linkLabel": "Ver caso de APV",
+      "image": {
+        "alt": "Propuesta del simulador de pensión con controles de ahorro APV y edad de jubilación",
+        "asset": {
+          "_type": "reference",
+          "_ref": "image-3f533a6a9fcb899e84dbf631ee608b253ea81e11-1288x612-png"
+        },
+        "_type": "image",
+        "crop": {
+          "bottom": 0.05,
+          "right": 0.01,
+          "top": 0.06,
+          "_type": "sanity.imageCrop",
+          "left": 0.55
+        }
+      }
+    }
+  ],
+  "processLabel": "Proceso",
+  "processTitle": "Del problema a una experiencia que funciona",
+  "steps": [
+    {
+      "_key": "understand",
+      "_type": "homeStep",
+      "title": "Entender y enfocar",
+      "description": "Combino investigación, feedback y datos disponibles para identificar fricciones y definir qué conviene resolver primero."
+    },
+    {
+      "_key": "design",
+      "_type": "homeStep",
+      "title": "Diseñar y validar",
+      "description": "Traduzco los hallazgos en flujos, interfaces y prototipos. Uso pruebas con usuarios para revisar decisiones y orientar las iteraciones."
+    },
+    {
+      "_key": "connect",
+      "_type": "homeStep",
+      "title": "Conectar con la implementación",
+      "description": "Mi experiencia frontend me permite evaluar restricciones, definir estados y cuidar la consistencia entre el diseño y el producto implementado."
+    }
+  ],
+  "about": {
+    "_type": "reference",
+    "_ref": "88f18267-98ff-476c-88bb-1be7e3250ca9"
+  },
+  "aboutTitle": "Diseño con una mirada de producto y experiencia en implementación.",
+  "aboutText": "Soy David Godoy, diseñador de productos digitales. Mi experiencia en el canal digital de AFP Modelo incluye flujos de acceso, búsqueda de información y herramientas para comprender productos previsionales.\n\nCombino investigación, diseño de interacción y frontend para tomar decisiones considerando tanto la experiencia de las personas como las condiciones de implementación.",
+  "aboutLinkLabel": "Más sobre mí",
+  "cvLabel": "Ver CV",
+  "contact": {
+    "_type": "reference",
+    "_ref": "e5f93a61-4055-4f65-8933-5e23ed6b16fe"
+  },
+  "contactLabel": "Contacto",
+  "contactTitle": "Conversemos sobre producto.",
+  "contactText": "Busco aportar como Senior Product Designer en equipos que conecten investigación, diseño y desarrollo.",
+  "emailLabel": "Escríbeme",
+  "linkedinLabel": "LinkedIn",
+  "seoTitle": "David Godoy — Senior Product Designer",
+  "seoDescription": "Senior Product Designer: investigación, diseño de interacción y experiencia frontend para conectar las necesidades de las personas con soluciones digitales viables."
+}

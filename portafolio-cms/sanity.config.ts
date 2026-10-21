@@ -16,7 +16,9 @@ export default defineConfig({
         S.list()
           .title('Contenido')
           .items([
-            ...S.documentTypeListItems().filter((item) => item.getId() !== 'skillCategory'),
+            S.listItem().title('Inicio').child(S.document().schemaType('home').documentId('home')),
+            S.listItem().title('Sobre mí').child(S.document().schemaType('sobreMi').documentId('88f18267-98ff-476c-88bb-1be7e3250ca9')),
+            ...S.documentTypeListItems().filter((item) => !['skillCategory', 'home', 'sobreMi'].includes(item.getId() || '')),
             S.divider(),
             S.listItem()
               .title('Categorías de skills')
@@ -33,5 +35,14 @@ export default defineConfig({
 
   schema: {
     types: schemaTypes,
+    templates: (templates) => templates.filter((template) => !['home','sobreMi'].includes(template.schemaType)),
+  },
+  document: {
+    actions: (actions, context) => ['home','sobreMi'].includes(context.schemaType)
+      ? actions.filter((action) => action.action !== 'duplicate')
+      : actions,
+    productionUrl: async (previous, {document}) => document._type === 'home'
+      ? 'http://127.0.0.1:3000/'
+      : document._type === 'sobreMi' ? 'http://127.0.0.1:3000/sobre-mi' : previous,
   },
 })

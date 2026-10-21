@@ -35,17 +35,20 @@ export default function RootLayout({
     <html lang="es">
       <body className={`${figtree.variable} ${inter.variable} bg-white text-black`}>
 
-      <header className="fixed top-0 left-0 right-0 z-110 flex justify-between items-center px-6 py-6 md:px-16 backdrop-blur border-gray-200">
-        <a href="/">
-          <img src="/Logo_DG.svg" alt="Logo" width={52} height={28} />
+      <a className="skip-link" href="#contenido">Saltar al contenido</a>
+      <header className="site-header">
+       <div className="site-header-inner">
+        <a href="/" className="brand" aria-label="David Godoy, inicio">
+          <img src="/Logo_DG.svg" alt="DG" width={52} height={28} />
         </a>
 
         <HeaderNav />
+       </div>
       </header>
 
-      <main className="pt-20">
+      <div className="pt-20" id="contenido" tabIndex={-1}>
         {children}
-      </main>
+      </div>
 
       <Footer />
 

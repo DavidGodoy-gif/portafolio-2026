@@ -1,72 +1,18 @@
-import CasePortableContent from "@/components/CasePortableContent";
-import { client } from "@/lib/sanity";
-
-export const dynamic = "force-dynamic";
-
-const SOBRE_MI_QUERY = `
-  *[_type == "sobreMi"][0]{
-    title,
-    "content": content[]{
-      ...,
-      _type == "image" => {
-        ...,
-        asset->{
-          ...,
-          metadata { dimensions }
-        }
-      },
-      _type == "pdfBlock" => {
-        ...,
-        file {
-          ...,
-          asset->{
-            url,
-            originalFilename,
-            mimeType,
-            size
-          }
-        }
-      }
-    }
-  }
-`;
-
-const FALLBACK_TITLE = "Sobre mí";
-
-const FALLBACK_PARAGRAPH =
-  "UX Developer con experiencia end-to-end: investigación, diseño de experiencia, UI y desarrollo frontend. He liderado procesos completos desde discovery hasta implementación productiva.";
-
-async function getSobreMi() {
-  return client.fetch<{
-    title?: string | null;
-    content?: unknown[] | null;
-  }>(SOBRE_MI_QUERY, {}, { next: { revalidate: 60, tags: ["sobreMi"] } });
+import './about-preview.css'
+import PublishedAbout from '@/components/PublishedAbout'
+import AboutPreview from '@/components/AboutPreview'
+import {getAbout} from '@/lib/about'
+import {getContentContext} from '@/lib/cms'
+export const dynamic='force-dynamic'
+type Props={searchParams:Promise<{preview?:string}>}
+export async function generateMetadata({searchParams}:Props){
+ const published=(await searchParams).preview==='published'
+ const [c,context]=await Promise.all([getAbout(published),getContentContext(published)])
+ return {...(c?{title:c.seoTitle,description:c.description}:{}),...(context.drafts?{robots:{index:false,follow:false}}:{})}
 }
-
-export default async function SobreMi() {
-  const data = await getSobreMi();
-  const title = data?.title?.trim() || FALLBACK_TITLE;
-  const content = data?.content;
-  const hasBlocks = Array.isArray(content) && content.length > 0;
-
-  return (
-    <main className="sobre-mi-page mx-auto w-full max-w-[1200px] px-6 py-12 md:px-8 md:py-32">
-      <div className="w-full text-left">
-        <h1 className="text-4xl font-bold text-gradient-magenta-cyan">{title}</h1>
-
-        {hasBlocks ? (
-          <section className="mb-8">
-            <div className="case-title"></div>
-            <div className="sobre-mi-portable">
-              <CasePortableContent value={content} />
-            </div>
-          </section>
-        ) : (
-          <div className="mt-16 pt-6 text-neutral-400 leading-relaxed">
-            <p>{FALLBACK_PARAGRAPH}</p>
-          </div>
-        )}
-      </div>
-    </main>
-  );
+export default async function SobreMi({searchParams}:Props){
+ const published=(await searchParams).preview==='published'
+ const [c,context]=await Promise.all([getAbout(published),getContentContext(published)])
+ if(!c)return <>{context.notice&&<aside className="home-preview mx-auto max-w-[1200px]" role="status">{context.notice}</aside>}<PublishedAbout/></>
+ return <AboutPreview content={c} preview={context.notice}/>
 }

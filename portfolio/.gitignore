@@ -39,3 +39,6 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Recoverable Sanity content snapshots (never credentials)
+/backups/sanity/

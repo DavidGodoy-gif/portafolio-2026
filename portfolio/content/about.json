@@ -1,0 +1,45 @@
+{
+  "label": "Sobre mí",
+  "identity": "David Godoy · Senior Product Designer",
+  "headline": "Diseño con mirada de producto y experiencia en",
+  "headlineAccent": "implementación.",
+  "description": "Combino investigación, diseño de interacción y frontend para crear experiencias claras y viables.",
+  "workLabel": "Ver mi trabajo",
+  "cvLabel": "Ver CV",
+  "aboutRef": "88f18267-98ff-476c-88bb-1be7e3250ca9",
+  "contactRef": "e5f93a61-4055-4f65-8933-5e23ed6b16fe",
+  "experienceLabel": "Experiencia",
+  "experienceTitle": "Mi experiencia en producto",
+  "experienceText": "En el canal digital de AFP Modelo he trabajado en experiencias de acceso, búsqueda de información y herramientas de ahorro previsional.",
+  "contributionTitle": "Mi aporte",
+  "contributions": [
+    "Investigación y definición del problema.",
+    "Diseño de interacción y validación.",
+    "Colaboración e implementación frontend."
+  ],
+  "projectsLabel": "Trabajo destacado",
+  "projectsTitle": "Tres maneras de abordar un problema",
+  "projects": [
+    {"caseRef": "7ab54fe5-5b26-40b1-a1cc-761b4e764e8f", "context": "Acceso digital", "title": "Login y Cambio de Clave", "description": "Claridad en un flujo crítico.", "linkLabel": "Ver caso de Login y Cambio de Clave"},
+    {"caseRef": "9bb0130f-831c-4d87-af21-b56f960085ad", "context": "Encontrar información", "title": "Buscador AFP Modelo", "description": "Conectar contenido, navegación y búsqueda.", "linkLabel": "Ver caso del Buscador AFP Modelo"},
+    {"caseRef": "969f10d0-d2ce-498b-b6df-146517983058", "context": "Comprender un producto", "title": "Herramienta interactiva de APV", "description": "Hacer visible el valor del ahorro futuro.", "linkLabel": "Ver caso de la Herramienta interactiva de APV"}
+  ],
+  "caseAction": "Ver caso",
+  "criteriaLabel": "Criterio",
+  "criteriaTitle": "Cómo tomo decisiones",
+  "criteria": [
+    {"title": "Evidencia antes de asumir", "description": "Investigo, analizo y contrasto datos para entender el problema."},
+    {"title": "Validar para iterar", "description": "Convierto ideas en prototipos y las reviso con usuarios para orientar la solución."},
+    {"title": "Restricciones como parte del diseño", "description": "Considero alcance, tiempos y capacidades técnicas desde el inicio."},
+    {"title": "Aprender después del lanzamiento", "description": "Reviso resultados e identifico oportunidades para siguientes iteraciones."}
+  ],
+  "differentiatorLabel": "Frontend / UX Engineering",
+  "differentiatorTitle": "Un diferenciador al servicio del producto.",
+  "differentiatorText": "Entender la implementación me ayuda a definir estados, anticipar restricciones y colaborar con desarrollo.",
+  "contactLabel": "Contacto",
+  "contactTitle": "Hablemos de tu equipo y sus desafíos.",
+  "contactText": "Senior Product Designer con experiencia en frontend y UX Engineering.",
+  "emailLabel": "Escríbeme",
+  "linkedinLabel": "LinkedIn",
+  "seoTitle": "Sobre mí — David Godoy · Senior Product Designer"
+}

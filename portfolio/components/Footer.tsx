@@ -1,3 +1,4 @@
+import '@/lib/trust-system-ca';
 import { client } from "@/lib/sanity";
 import { FooterCopyButton } from "@/components/FooterCopyButton";
 
