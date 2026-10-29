@@ -1,4 +1,6 @@
 "use client";
+import {hasImageAsset} from '@/lib/sanity-image'
+
 
 import { PortableText, type PortableTextComponents } from "@portabletext/react";
 import Image from 'next/image';
@@ -115,7 +117,7 @@ const articleComponents: PortableTextComponents = {
   types: {
     ...components.types,
     image: ({value}) => {
-      if(!value.asset)return null;
+      if(!hasImageAsset(value))return null;
       const dimensions = value.asset.metadata?.dimensions;
       const url = urlFor(value).width(1800).auto('format').url();
       return <figure className="case-image"><a href={url} target="_blank" rel="noreferrer" aria-label={value.alt ? `Ampliar: ${value.alt}` : 'Ampliar imagen del caso'}><MediaReveal><Image src={url} alt={value.alt || ''} width={dimensions?.width || 1200} height={dimensions?.height || 800} sizes="(min-width: 1200px) 920px, 100vw" /></MediaReveal></a>{value.caption && <figcaption>{value.caption}</figcaption>}</figure>;

@@ -1,3 +1,4 @@
+import {hasImageAsset} from '@/lib/sanity-image'
 import '@/lib/trust-system-ca'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -34,7 +35,7 @@ export default async function Caso({params}:Props) {
   const index = cases.findIndex(item=>item._id===c._id)
   const previous = index>0 ? cases[index-1] : null
   const next = index>=0 ? cases[index+1] : null
-  const image = c.thumbnail?.asset ? urlFor(c.thumbnail).width(1800).auto('format').url() : null
+  const image = hasImageAsset(c.thumbnail) ? urlFor(c.thumbnail).width(1800).auto('format').url() : null
   const metrics = c.metrics?.filter(m=>m.label && typeof m.value==='number') || []
   return <main className="case-article">
     <nav className="case-breadcrumb" aria-label="Ruta de navegación"><Link href="/casos">Trabajo</Link>{c.title && <><span aria-hidden>/</span><span aria-current="page">{c.title}</span></>}</nav>

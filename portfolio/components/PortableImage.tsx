@@ -1,4 +1,6 @@
 "use client";
+import {hasImageAsset} from '@/lib/sanity-image'
+
 
 import Image from "next/image";
 import MediaReveal from './MediaReveal';
@@ -27,7 +29,7 @@ export default function PortableImage({ value }: PortableImageProps) {
   const desktopH = Math.round(intrinsicH * desktopScale);
 
   const sanityW = Math.min(2400, Math.max(320, intrinsicW * 2));
-  const imageUrl = urlFor(value).width(sanityW).fit("max").url();
+  const imageUrl = hasImageAsset(value) ? urlFor(value).width(sanityW).fit("max").url() : null;
 
 
   useEffect(() => {
@@ -58,6 +60,8 @@ export default function PortableImage({ value }: PortableImageProps) {
       window.removeEventListener("resize", centerImage);
     };
   }, [isMobile, intrinsicW, intrinsicH]);
+
+  if (!imageUrl) return null;
 
   return (
     <div

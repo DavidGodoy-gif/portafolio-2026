@@ -1,3 +1,4 @@
+import {hasImageAsset} from '@/lib/sanity-image'
 import CaseCard from '@/components/CaseCard'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -74,8 +75,8 @@ export default async function Home() {
     getSkillCategories(),
     getHomeAbout(),
   ])
-  const aboutImageUrl = about?.image?.asset
-    ? urlFor(about.image).width(180).height(180).fit('crop').url()
+  const aboutImageUrl = hasImageAsset(about?.image)
+    ? urlFor(about?.image).width(180).height(180).fit('crop').url()
     : null
 
   return (

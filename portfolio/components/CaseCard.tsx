@@ -1,3 +1,4 @@
+import {hasImageAsset} from '@/lib/sanity-image'
 import Link from "next/link";
 import Image from "next/image";
 import { urlFor } from "@/lib/sanity";
@@ -18,7 +19,7 @@ export default function CaseCard({
   excerpt,
   thumbnail,
 }: CaseCardProps) {
-  const imageUrl = thumbnail ? urlFor(thumbnail).width(800).height(500).fit("crop").url() : null;
+  const imageUrl = hasImageAsset(thumbnail) ? urlFor(thumbnail).width(800).height(500).fit("crop").url() : null;
   const alt = thumbnail?.alt || title;
 
   return (
@@ -27,17 +28,10 @@ export default function CaseCard({
       className="case-card group alink"
     >
       <div className="case-card-media">
-        {imageUrl ? (
+        {imageUrl && (
           <Image
             src={imageUrl}
             alt={alt}
-            fill
-            className="object-cover"
-          />
-        ) : (
-          <Image
-            src="/figma-case-card.png"
-            alt=""
             fill
             className="object-cover"
           />
