@@ -728,6 +728,17 @@ body:has(.case-article) { background:radial-gradient(ellipse 40% 650px at 100% 1
 .case-prose iframe { max-width:100%; }
 .case-prose .btnzoom { min-height:44px; min-width:44px; color:#24bbff; }
 .case-prose .mermaid-svg-host { min-width:0; }
+/* Keep Mermaid labels consistent with the dimensions measured during rendering. */
+.mermaid-svg-host .nodeLabel p,
+.mermaid-svg-host .edgeLabel p {
+ margin:0;
+ padding:0;
+ font:inherit;
+ line-height:inherit;
+ white-space:normal;
+ overflow-wrap:normal;
+ word-break:normal;
+}
 .case-document-metrics { margin:40px 0 24px 254px; padding-top:24px; border-top:1px solid #224454; }
 .case-document-metrics h2 { color:#f2f5fa; font-size:23px; margin:0 0 18px; }
 .case-document-metrics dl { display:flex; flex-wrap:wrap; gap:28px; }

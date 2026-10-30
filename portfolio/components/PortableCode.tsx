@@ -17,7 +17,7 @@ type PortableCodeProps = {
 };
 
 let mermaidInitialized = false;
-const MERMAID_INITIAL_SCALE_BOOST = 1.35;
+const MERMAID_INITIAL_SCALE_BOOST = 0.9;
 const MERMAID_INITIAL_SCALE_MAX = 2.25;
 
 function initMermaid() {
@@ -25,6 +25,20 @@ function initMermaid() {
   mermaid.initialize({
     startOnLoad: false,
     theme: "base",
+    // This CSS is included in Mermaid's temporary SVG while labels are measured,
+    // and in the final SVG. Article typography must not change their geometry.
+    themeCSS: `
+      text, tspan, .label, .nodeLabel, .edgeLabel,
+      foreignObject div, foreignObject span, foreignObject p {
+        font-family: var(--font-inter), sans-serif;
+        font-size: 16px;
+        line-height: 1.5;
+      }
+      foreignObject p {
+        margin: 0; padding: 0;
+        white-space: normal; overflow-wrap: normal; word-break: normal;
+      }
+    `,
     themeVariables: {
       background: "#18181b",
       primaryColor: "#18181b",
@@ -34,7 +48,7 @@ function initMermaid() {
       secondaryColor: "#302856",
       tertiaryColor: "#321339",
       fontSize: "16px",
-      fontFamily: "Inter, sans-serif",
+      fontFamily: "var(--font-inter), sans-serif",
     },
   });
   mermaidInitialized = true;
@@ -81,11 +95,19 @@ function MermaidDiagram({ code }: { code: string }) {
     initMermaid();
 
     let cancelled = false;
+    let resizeObserver: ResizeObserver | undefined;
 
-    mermaid
-      .render(diagramId, code)
-      .then(({ svg, bindFunctions }) => {
-        if (cancelled || !ref.current) return;
+    const renderDiagram = async () => {
+      const font = getComputedStyle(document.body).getPropertyValue('--font-inter').trim();
+      if (font) await document.fonts.load(`16px ${font}`);
+      await document.fonts.ready;
+      if (cancelled) return;
+      return mermaid.render(diagramId, code);
+    };
+    renderDiagram()
+      .then((result) => {
+        if (cancelled || !ref.current || !result) return;
+        const {svg, bindFunctions} = result;
         ref.current.innerHTML = svg;
         bindFunctions?.(ref.current);
 
@@ -94,8 +116,11 @@ function MermaidDiagram({ code }: { code: string }) {
           const container = viewportRef.current;
           if (!svgNode || !container) return;
 
-          const svgWidth = svgNode.getBoundingClientRect().width;
-          const svgHeight = svgNode.getBoundingClientRect().height;
+          // Use untransformed dimensions so zoom/resize never changes the fit baseline.
+          const {width: svgWidth, height: svgHeight} = svgNode.viewBox.baseVal;
+          svgNode.style.maxWidth = 'none';
+          svgNode.style.width = `${svgWidth}px`;
+          svgNode.style.height = `${svgHeight}px`;
           const containerWidth = container.clientWidth;
           const containerHeight = container.clientHeight;
 
@@ -123,6 +148,8 @@ function MermaidDiagram({ code }: { code: string }) {
         };
 
         requestAnimationFrame(() => requestAnimationFrame(applyFitScale));
+        resizeObserver = new ResizeObserver(applyFitScale);
+        if (viewportRef.current) resizeObserver.observe(viewportRef.current);
 
         setRendered(true);
       })
@@ -136,6 +163,7 @@ function MermaidDiagram({ code }: { code: string }) {
 
     return () => {
       cancelled = true;
+      resizeObserver?.disconnect();
     };
   }, [mounted, diagramId, code]);
 
@@ -156,7 +184,7 @@ function MermaidDiagram({ code }: { code: string }) {
     <div className="flex min-h-[300px] flex-1 flex-col overflow-hidden codetheme">
       <TransformWrapper
         initialScale={1}
-        minScale={0.15}
+        minScale={0.01}
         maxScale={9}
         centerOnInit
         centerZoomedOut
@@ -192,20 +220,20 @@ function MermaidDiagram({ code }: { code: string }) {
               </button>
             </div>
 
-            <div ref={viewportRef} className="min-h-0 flex-1">
+            <div ref={viewportRef} className="relative min-h-0 flex-1 overflow-hidden">
               <TransformComponent
                 wrapperClass="!h-full !w-full !max-w-none"
-                wrapperStyle={{ width: "100%", height: "100%", maxWidth: "100%" }}
+                wrapperStyle={{ position: "absolute", inset: 0, width: "100%", height: "100%", maxWidth: "100%" }}
                 contentStyle={{
-                  width: "100%",
-                  maxWidth: "100%",
+                  width: "max-content",
+                  maxWidth: "none",
                   minHeight: "min-content",
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "center",
                 }}
               >
-              <div className="relative flex min-h-[200px] w-full flex-col items-center justify-center">
+              <div className="relative flex flex-col items-center justify-center">
                 <div
                   ref={ref}
                   className="mermaid-svg-host"
