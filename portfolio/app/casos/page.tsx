@@ -3,9 +3,19 @@ import CaseCard from "@/components/CaseCard";
 
 export const dynamic = "force-dynamic";
 
+type CaseSummary = {
+  _id: string;
+  title: string;
+  slug: string;
+  excerpt?: string;
+  thumbnail?: {alt?: string; asset?: unknown};
+};
+
 async function getCasos() {
-  return client.fetch(`
-    *[_type == "case"] | order(order asc) | order(_updatedAt desc) {
+  return client.fetch<CaseSummary[]>(`
+    *[_type == "case" && defined(slug.current)]
+    | order(coalesce(order, 2147483647) asc, slug.current asc, _id asc) {
+      _id,
       title,
       "slug": slug.current,
       excerpt,
@@ -18,14 +28,14 @@ export default async function Casos() {
   const casos = await getCasos();
 
   return (
-    <main className="mx-auto w-full max-w-[1200px] px-6 py-24 md:px-8">
-      <h1 className="text-6xl font-bold mb-12 text-gradient-magenta-cyan">Productos</h1>
-      <div className="case-title mb-8"></div>
+    <main className="portfolio-home work-catalog">
+      <h1 className="sr-only">Todos los trabajos</h1>
 
-      <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
-        {casos.map((caso: any) => (
+      <div className="home-projects">
+        {casos.map((caso) => (
           <CaseCard
-            key={caso.slug}
+            presentation="home"
+            key={caso._id}
             title={caso.title}
             slug={caso.slug}
             excerpt={caso.excerpt}

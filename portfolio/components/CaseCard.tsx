@@ -7,6 +7,7 @@ type CaseCardProps = {
   title: string;
   slug: string;
   excerpt?: string;
+  presentation?: 'default' | 'home';
   thumbnail?: {
     alt?: string;
     asset?: unknown;
@@ -18,9 +19,21 @@ export default function CaseCard({
   slug,
   excerpt,
   thumbnail,
+  presentation = 'default',
 }: CaseCardProps) {
   const imageUrl = hasImageAsset(thumbnail) ? urlFor(thumbnail).width(800).height(500).fit("crop").url() : null;
   const alt = thumbnail?.alt || title;
+
+  if (presentation === 'home') return (
+    <Link href={`/casos/${slug}`} className="home-project work-project">
+      {imageUrl && <div className="project-media"><Image src={imageUrl} alt={alt} fill sizes="(min-width: 768px) 50vw, 100vw" className="project-photo" /></div>}
+      <div className="project-copy">
+        <h2>{title}</h2>
+        {excerpt && <p className="project-summary">{excerpt}</p>}
+        <span className="work-project-link">Ver caso <span aria-hidden="true">→</span></span>
+      </div>
+    </Link>
+  );
 
   return (
     <Link

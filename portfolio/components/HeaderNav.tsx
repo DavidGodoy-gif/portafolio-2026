@@ -2,7 +2,7 @@
 import Link from 'next/link'
 import {useRef, useState} from 'react'
 import {usePathname} from 'next/navigation'
-const links = [{href:'/#trabajo',label:'Trabajo'},{href:'/sobre-mi',label:'Sobre mí'},{href:'/#contacto',label:'Contacto'}]
+const links = [{href:'/casos',label:'Trabajo'},{href:'/sobre-mi',label:'Sobre mí'},{href:'/#contacto',label:'Contacto'}]
 export function HeaderNav() {
   const [open,setOpen] = useState(false)
   const button = useRef<HTMLButtonElement>(null)
