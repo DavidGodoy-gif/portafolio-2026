@@ -8,6 +8,7 @@ import MediaReveal from './MediaReveal';
 import {urlFor} from '@/lib/sanity';
 import {caseBlocks, headingId} from '@/lib/case-content';
 import PortableImage from "@/components/PortableImage";
+import AnnotatedCaseImage from "@/components/AnnotatedCaseImage";
 import PortableChart from "@/components/PortableChart";
 import PortableTable from "@/components/PortableTable";
 import PortableEmbed from "@/components/PortableEmbed";
@@ -118,6 +119,7 @@ const articleComponents: PortableTextComponents = {
     ...components.types,
     image: ({value}) => {
       if(!hasImageAsset(value))return null;
+      if (Array.isArray(value.annotations) && value.annotations.length > 0) return <AnnotatedCaseImage value={value} />;
       const dimensions = value.asset.metadata?.dimensions;
       const url = urlFor(value).width(1800).auto('format').url();
       return <figure className="case-image"><a href={url} target="_blank" rel="noreferrer" aria-label={value.alt ? `Ampliar: ${value.alt}` : 'Ampliar imagen del caso'}><MediaReveal><Image src={url} alt={value.alt || ''} width={dimensions?.width || 1200} height={dimensions?.height || 800} sizes="(min-width: 1200px) 920px, 100vw" /></MediaReveal></a>{value.caption && <figcaption>{value.caption}</figcaption>}</figure>;

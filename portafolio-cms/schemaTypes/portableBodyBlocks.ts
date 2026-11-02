@@ -28,6 +28,16 @@ export default [
         title: "Caption",
         type: "string",
       },
+      {
+        name: "annotations",
+        title: "Anotaciones editoriales",
+        description: "Opcional: hasta tres llamadas HTML junto a la captura; en móvil se apilan.",
+        type: "array",
+        of: [{type: "object", name: "imageAnnotation", fields: [
+          {name: "text", title: "Explicación", type: "string"},
+          {name: "position", title: "Posición vertical (%)", type: "number", description: "Entre 0 y 100; alinear con el elemento visible."},
+        ], preview: {select: {title: "text"}}}],
+      },
     ],
   },
   {

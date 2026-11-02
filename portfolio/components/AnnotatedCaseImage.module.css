@@ -1,0 +1,16 @@
+.figure { margin: 20px 0; max-width: 100%; }
+.layout { display: grid; grid-template-columns: minmax(0, 452px) minmax(200px, 1fr); gap: 20px; align-items: stretch; }
+.shot { position: relative; width: 100%; max-width: 452px; padding-right: 32px; min-width: 0; }
+.shot img { display: block; width: 100%; height: auto; }
+.markers { position: absolute; inset: 0; pointer-events: none; }
+.marker { position: absolute; right: 0; display: grid; place-items: center; width: 26px; height: 26px; transform: translateY(-50%); border-radius: 50%; background: #24bbff; color: #041722; font: 700 15px/1 Arial, sans-serif; }
+.marker::before { content: ''; position: absolute; right: 100%; top: 50%; width: 14px; height: 2px; background: #24bbff; }
+.figure .notes { position: relative; list-style: none; padding: 0; margin: 0; min-width: 0; }
+.figure .notes .note { position: absolute; left: 0; right: 0; margin: 0; padding: 0; transform: translateY(-50%); font-size: 16px; line-height: 1.45; overflow-wrap: normal; }
+.number { color: #24bbff; font-weight: 700; }
+.caption { margin-top: 10px; color: #e3a5cc; font-size: 13px; line-height: 1.5; }
+@media (max-width: 1100px) {
+  .layout { grid-template-columns: minmax(0, 1fr); gap: 12px; }
+  .figure .notes { max-width: 452px; }
+  .figure .notes .note { position: static; margin: 7px 0; transform: none; }
+}
