@@ -10,8 +10,21 @@ export default function CaseDemo({value}: {value: Value}) {
   const [error, setError] = useState(false);
   const [mode, setMode] = useState('Presencial');
   const [status, setStatus] = useState('Ejemplo preparado.');
+  const [sample, setSample] = useState('');
+  const [touched, setTouched] = useState(false);
+  const valid = sample.length >= 4;
   let content;
   switch (value.kind) {
+    case 'passwordCreation': content = <div className={styles.field}>
+      <label htmlFor={id}>Clave ficticia del ejemplo</label>
+      <small id={id+'-help'}>Condición inventada para este ejemplo: al menos 4 caracteres. Usa texto ficticio.</small>
+      <div className={styles.inline}><input id={id} type={visible ? 'text' : 'password'} value={sample} autoComplete="off" spellCheck={false} aria-describedby={id+'-help '+id+'-state'} aria-invalid={touched && !valid} onChange={e=>{setSample(e.target.value);setTouched(true);}} onBlur={()=>{if(sample)setTouched(true);}} />
+        <button type="button" aria-controls={id} aria-pressed={visible} aria-label={visible ? 'Ocultar clave ficticia' : 'Mostrar clave ficticia'} onClick={()=>setVisible(!visible)}>{visible ? 'Ocultar' : 'Mostrar'}</button></div>
+      <small id={id+'-state'} role="status" className={touched && !valid ? styles.error : undefined}>{!touched ? '— Estado inicial: escribe un texto ficticio para probar.' : valid ? '✓ Correcto para el ejemplo: cumple la condición ficticia.' : '! Por revisar: escribe al menos 4 caracteres para este ejemplo.'}</small>
+    </div>; break;
+    case 'iterationAdjustments': content = <div className={styles.grid}>
+      {[['Estado inicial','Incorporé un estado neutro antes de señalar un error.'],['Espera','Destaqué el temporizador para hacer visible el tiempo restante.'],['Acciones y mensajes','Simplifiqué textos y ajusté controles ambiguos.']].map(([title,text])=><div className={styles.card} key={title}><strong>{title}</strong><p>{text}</p></div>)}
+    </div>; break;
     case 'passwordVisibility': content = <div className={styles.field}>
       <label htmlFor={id}>Clave ficticia</label>
       <div className={styles.inline}><input id={id} type={visible ? 'text' : 'password'} value="Ejemplo-2026" readOnly autoComplete="off" spellCheck={false} />

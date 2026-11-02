@@ -249,6 +249,8 @@ export default [
     fields: [
       {name: "kind", title: "Ejemplo", type: "string", options: {list: [
         {title: "Visibilidad de clave", value: "passwordVisibility"},
+        {title: "Creación de clave ficticia", value: "passwordCreation"},
+        {title: "Ajustes de iteración", value: "iterationAdjustments"},
         {title: "Contenido y comportamiento", value: "componentVariants"},
         {title: "Estados de botón", value: "buttonStates"},
         {title: "Ayuda y error de campo", value: "fieldFeedback"},
