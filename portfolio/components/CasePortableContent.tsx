@@ -13,6 +13,7 @@ import PortableChart from "@/components/PortableChart";
 import PortableTable from "@/components/PortableTable";
 import PortableEmbed from "@/components/PortableEmbed";
 import PortableCode from "@/components/PortableCode";
+import CaseDemo from "@/components/CaseDemo";
 import PortablePdf from "@/components/PortablePdf";
 
 const styles = {
@@ -58,6 +59,7 @@ const components = {
     embedBlock: PortableEmbed,
     codeBlock: PortableCode,
     pdfBlock: PortablePdf,
+    demoBlock: CaseDemo,
   },
 };
 
@@ -68,6 +70,7 @@ const MEDIA_TYPES = new Set([
   "embedBlock",
   "codeBlock",
   "pdfBlock",
+  "demoBlock",
 ]);
 
 type PortableBlock = {

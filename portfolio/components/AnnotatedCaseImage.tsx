@@ -10,7 +10,7 @@ export default function AnnotatedCaseImage({value}: {value: Value}) {
   const dimensions = value.asset.metadata?.dimensions;
   return <figure className={styles.figure}>
     <div className={styles.layout}>
-      <div className={styles.shot}>
+      <div className={styles.shot} style={{maxWidth: Math.min(420, dimensions?.width || 420) + 32}}>
         <Image src={urlFor(value).width(1350).fit('max').auto('format').url()} alt={value.alt || ''}
           width={dimensions?.width || 1350} height={dimensions?.height || 1330}
           sizes="(min-width: 1101px) 420px, (max-width: 480px) 85vw, 420px" />

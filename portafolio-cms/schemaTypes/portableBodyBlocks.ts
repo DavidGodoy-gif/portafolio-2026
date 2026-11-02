@@ -214,6 +214,8 @@ export default [
       },
     },
     fields: [
+      {name: "staticDiagram", title: "Diagrama estático adaptable", type: "boolean"},
+      {name: "description", title: "Descripción accesible del esquema", type: "text"},
       {
         name: "title",
         title: "Título",
@@ -241,5 +243,21 @@ export default [
         type: "text",
       },
     ],
+  },
+  {
+    name: "demoBlock", title: "Demostración independiente", type: "object",
+    fields: [
+      {name: "kind", title: "Ejemplo", type: "string", options: {list: [
+        {title: "Visibilidad de clave", value: "passwordVisibility"},
+        {title: "Contenido y comportamiento", value: "componentVariants"},
+        {title: "Estados de botón", value: "buttonStates"},
+        {title: "Ayuda y error de campo", value: "fieldFeedback"},
+        {title: "Campos condicionales", value: "conditionalFields"},
+        {title: "Información y contexto", value: "informationLayers"}
+      ]}},
+      {name: "label", title: "Identificación visible", type: "string"},
+      {name: "caption", title: "Pie", type: "string"}
+    ],
+    preview: {select: {title: "label", subtitle: "kind"}}
   },
 ];

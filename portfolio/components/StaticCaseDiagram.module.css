@@ -1,0 +1,7 @@
+.diagram {background:#071B26;color:#F5F8FC;border:1px solid #315360;border-radius:14px;padding:24px;margin:24px 0;}
+.title {color:#FF92CB;font-size:14px;margin-bottom:18px;}
+.host {max-width:480px;margin:auto;}
+.host svg {display:block;width:100%;height:auto;}
+.host text,.host tspan {font-family:Arial,sans-serif!important;font-size:16px!important;fill:#F5F8FC!important;}
+.diagram figcaption {color:#d6e3ed;font-size:14px;line-height:1.6;margin-top:18px;}
+@media(max-width:600px){.diagram{padding:16px;}}

@@ -2,6 +2,7 @@
 
 import { useEffect, useId, useMemo, useRef, useState } from "react";
 import mermaid from "mermaid";
+import StaticCaseDiagram from "./StaticCaseDiagram";
 import {
   TransformWrapper,
   TransformComponent,
@@ -13,6 +14,8 @@ type PortableCodeProps = {
     title?: string;
     language?: string;
     code?: string;
+    staticDiagram?: boolean;
+    description?: string;
   };
 };
 
@@ -273,6 +276,7 @@ export default function PortableCode({ value }: PortableCodeProps) {
   const isMermaid = value?.language === "mermaid";
 
   if (!value?.code) return null;
+  if (isMermaid && value.staticDiagram) return <StaticCaseDiagram value={value} />;
 
   return (
     <section className="my-0 flex min-h-[390px] max-h-[500px] w-full flex-col overflow-hidden rounded-[14px] bg-zinc-900 p-5">
