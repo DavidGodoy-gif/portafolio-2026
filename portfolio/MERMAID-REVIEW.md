@@ -1,5 +1,17 @@
 # Revisión local de Mermaid — 30 de octubre de 2026
 
+## Seguimiento del 2 de noviembre: teléfonos físicos
+
+El usuario reportó un fallo distinto en Chrome, navegador MI y Free Adblock, en Motorola Edge 50 Fusion y Xiaomi MT9. La prueba anterior a 390 px corresponde a un navegador de escritorio redimensionado; no acredita funcionamiento en Android físico. La primera captura muestra texto vertical y ausencia de nodos y conexiones. La causa concreta en esos dispositivos sigue pendiente de obtener el mensaje de error.
+
+Se detectó que el mensaje de fallo estaba dentro del contenido de zoom con ancho intrínseco: sin SVG podía quedar con ancho cero y partirse letra por letra. Se trasladó fuera del zoom al visor completo. Además, se evita que el rechazo de `document.fonts.load` aborte todo el renderizado; el fallback tipográfico sigue siendo el mismo durante medición y presentación. Se suprime el SVG de error automático de Mermaid, conservando el aviso accesible del componente.
+
+`node scripts/check-mermaid-failures.mjs` verifica render normal, rechazo de fuente, rechazo de Mermaid y ambas fallas combinadas. TypeScript pasa y el navegador local sigue mostrando los tres mapas del caso sin errores.
+
+El usuario confirmó desde un celular físico que el mapa se ve correctamente al abrir la vista previa por la IP local del PC. No especificó cuál de los dispositivos/navegadores utilizó en esta comprobación. Esto acredita el funcionamiento de la versión local en ese teléfono; la causa exacta del fallo original no quedó identificada y falta comprobar la versión publicada después de su actualización. El usuario autorizó commit y push de estos cambios. No se modificó Sanity ni se ejecutó un despliegue manual.
+
+## Revisión anterior
+
 Se conservaron el aislamiento de párrafos y el factor de encuadre 0.9 que ya estaban modificados localmente. Se completó el aislamiento dentro del propio SVG mediante `themeCSS`, aplicado tanto durante la medición temporal de Mermaid como en su destino final. Nodos, decisiones y etiquetas de conexiones usan la misma fuente Inter local, tamaño de 16 px e interlineado de 24 px. El render espera la carga de la fuente.
 
 El encuadre usa el viewBox original, sin depender del zoom actual. Se recalcula al cambiar el tamaño disponible. Se corrigió además la altura del wrapper del zoom: antes podía medir 414 px dentro de un espacio real de 337 px y recortar la base del mapa. Ahora queda contenido en el área disponible. Se conservan los controles y el factor 0.9; no se modificaron textos ni diagramas de Sanity.

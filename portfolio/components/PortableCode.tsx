@@ -24,6 +24,7 @@ function initMermaid() {
   if (mermaidInitialized) return;
   mermaid.initialize({
     startOnLoad: false,
+    suppressErrorRendering: true,
     theme: "base",
     // This CSS is included in Mermaid's temporary SVG while labels are measured,
     // and in the final SVG. Article typography must not change their geometry.
@@ -99,7 +100,15 @@ function MermaidDiagram({ code }: { code: string }) {
 
     const renderDiagram = async () => {
       const font = getComputedStyle(document.body).getPropertyValue('--font-inter').trim();
-      if (font) await document.fonts.load(`16px ${font}`);
+      if (font) {
+        try {
+          await document.fonts.load(`16px ${font}`);
+        } catch (error) {
+          // A blocked/unavailable webfont must not prevent the diagram from rendering.
+          // Mermaid measures and displays using the same CSS fallback family.
+          console.warn('Mermaid font unavailable; using fallback font:', error);
+        }
+      }
       await document.fonts.ready;
       if (cancelled) return;
       return mermaid.render(diagramId, code);
@@ -242,13 +251,15 @@ function MermaidDiagram({ code }: { code: string }) {
                     transition: "opacity 0.3s ease",
                   }}
                 />
-                {mermaidError && (
-                  <p className="absolute inset-x-4 top-1/2 max-w-prose -translate-y-1/2 text-center text-sm text-red-400">
-                    No se pudo dibujar el diagrama Mermaid: {mermaidError}
-                  </p>
-                )}
               </div>
               </TransformComponent>
+              {mermaidError && (
+                <div role="alert" className="absolute inset-0 overflow-auto p-4">
+                  <p className="mermaid-render-error">
+                    No se pudo dibujar el diagrama Mermaid: {mermaidError}
+                  </p>
+                </div>
+              )}
             </div>
           </>
           );
