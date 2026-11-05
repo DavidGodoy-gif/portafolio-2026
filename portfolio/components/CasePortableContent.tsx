@@ -125,6 +125,11 @@ const articleComponents: PortableTextComponents = {
       if (Array.isArray(value.annotations) && value.annotations.length > 0) return <AnnotatedCaseImage value={value} />;
       const dimensions = value.asset.metadata?.dimensions;
       const url = urlFor(value).width(1800).auto('format').url();
+      // Preserve the original asset and link; replace only the embedded editorial
+      // heading in the presentation with accessible HTML above the composition.
+      if(value.asset._id === 'image-ced675ae6b6cc3b76d12bbce6de981e8244416f1-1536x1024-png') {
+        return <figure className="case-image"><div className="conceptual-image-title" style={{background:"#101b65",color:"#F5F8FC",padding:16,fontSize:18,lineHeight:1.4,textAlign:"center",borderRadius:"10px 10px 0 0"}}>Ejemplo conceptual en escritorio y móvil</div><a className="conceptual-image" style={{borderRadius:"0 0 10px 10px"}} href={url} target="_blank" rel="noreferrer" aria-label={`Ampliar: ${value.alt || ''}`}><MediaReveal><Image src={url} alt={value.alt || ''} style={{clipPath:"inset(9% 0 0)",marginTop:"-6%"}} width={dimensions?.width || 1536} height={dimensions?.height || 1024} sizes="(min-width: 1200px) 920px, 100vw" /></MediaReveal></a>{value.caption && <figcaption>{value.caption}</figcaption>}</figure>;
+      }
       return <figure className="case-image"><a href={url} target="_blank" rel="noreferrer" aria-label={value.alt ? `Ampliar: ${value.alt}` : 'Ampliar imagen del caso'}><MediaReveal><Image src={url} alt={value.alt || ''} width={dimensions?.width || 1200} height={dimensions?.height || 800} sizes="(min-width: 1200px) 920px, 100vw" /></MediaReveal></a>{value.caption && <figcaption>{value.caption}</figcaption>}</figure>;
     },
   },

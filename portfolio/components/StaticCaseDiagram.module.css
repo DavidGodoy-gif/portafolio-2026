@@ -1,7 +1,7 @@
 .diagram {background:#071B26;color:#F5F8FC;border:1px solid #315360;border-radius:14px;padding:24px;margin:24px 0;}
 .title {color:#FF92CB;font-size:14px;margin-bottom:18px;}
-.host {max-width:480px;margin:auto;}
+.host {max-width:600px;margin:auto;}
 .host svg {display:block;width:100%;height:auto;}
-.host text,.host tspan {font-family:Arial,sans-serif!important;font-size:16px!important;fill:#F5F8FC!important;}
+.host text,.host tspan,.host :global(.label),.host :global(.nodeLabel),.host :global(.edgeLabel),.host foreignObject div,.host foreignObject p,.host foreignObject span {font-family:Arial,sans-serif!important;font-size:16px!important;line-height:1.4!important;margin:0!important;padding:0!important;white-space:normal!important;overflow-wrap:normal!important;word-break:normal!important;max-height:none!important;-webkit-line-clamp:unset!important;text-overflow:clip!important;fill:#F5F8FC!important;}
 .diagram figcaption {color:#d6e3ed;font-size:14px;line-height:1.6;margin-top:18px;}
 @media(max-width:600px){.diagram{padding:16px;}}

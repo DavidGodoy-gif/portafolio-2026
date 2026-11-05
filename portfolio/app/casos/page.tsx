@@ -1,4 +1,6 @@
-import { client } from "@/lib/sanity";
+import {client} from "@/lib/sanity";
+import {getContentContext} from "@/lib/cms";
+export const metadata={title:"Trabajos — David Godoy · Senior Product Designer",openGraph:{title:"Trabajos — David Godoy · Senior Product Designer"},twitter:{title:"Trabajos — David Godoy · Senior Product Designer"}};
 import CaseCard from "@/components/CaseCard";
 
 export const dynamic = "force-dynamic";
@@ -12,7 +14,8 @@ type CaseSummary = {
 };
 
 async function getCasos() {
-  return client.fetch<CaseSummary[]>(`
+  const {reader}=await getContentContext();
+  return (reader || client).fetch<CaseSummary[]>(`
     *[_type == "case" && defined(slug.current)]
     | order(coalesce(order, 2147483647) asc, slug.current asc, _id asc) {
       _id,

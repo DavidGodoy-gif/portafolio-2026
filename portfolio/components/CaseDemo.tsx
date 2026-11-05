@@ -9,7 +9,7 @@ export default function CaseDemo({value}: {value: Value}) {
   const [visible, setVisible] = useState(false);
   const [error, setError] = useState(false);
   const [mode, setMode] = useState('Presencial');
-  const [status, setStatus] = useState('Ejemplo preparado.');
+  const [status, setStatus] = useState('');
   const [sample, setSample] = useState('');
   const [touched, setTouched] = useState(false);
   const valid = sample.length >= 4;
@@ -59,8 +59,7 @@ export default function CaseDemo({value}: {value: Value}) {
       <div id={id+'-conditional'} className={styles.field}><label htmlFor={id+'-detail'}>{mode==='Presencial'?'Sede':'Enlace'}</label><input key={mode} id={id+'-detail'} type={mode==='Presencial'?'text':'url'} autoComplete="off" placeholder={mode==='Presencial'?'Ej.: Biblioteca del barrio':'https://example.org/actividad'} /></div>
     </div>; break;
     case 'informationLayers': content = <div className={styles.grid}>
-      <div className={styles.card}><span className={styles.accent}>1 · Concepto principal</span><strong>Escenario de ahorro</strong><p>Una representación para explorar alternativas.</p></div>
-      <div className={styles.card}><span className={styles.accent}>2 · Explicación</span><p>La ayuda acompaña al concepto que necesita aclarar.</p><small>3 · Contexto: ejemplo de organización, sin cálculos ni proyecciones.</small></div>
+      {[['Concepto','Qué representa el escenario.'],['Explicación','Cómo leerlo.'],['Contexto','Supuestos y límites.']].map(([title,description],index)=><div className={styles.card} key={title}><span className={styles.accent}>Nivel {index+1}</span><strong>{title}</strong><p>{description}</p></div>)}
     </div>; break;
     default: return null;
   }

@@ -4,6 +4,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import {notFound} from 'next/navigation'
 import {client,urlFor} from '@/lib/sanity'
+import {getContentContext} from '@/lib/cms'
 import CasePortableContent from '@/components/CasePortableContent'
 import CaseIndex from '@/components/CaseIndex'
 import MediaReveal from '@/components/MediaReveal'
@@ -23,12 +24,14 @@ const CASE_ORDER_QUERY = `*[_type == "case" && defined(slug.current)] | order(co
 type Props = {params:Promise<{slug:string}>}
 export async function generateMetadata({params}:Props) {
   const {slug}=await params
-  const c = await client.fetch<CaseDocument | null>(CASE_QUERY,{slug})
+  const {reader}=await getContentContext();
+  const c = await (reader || client).fetch<CaseDocument | null>(CASE_QUERY,{slug})
   return c ? {title:`${c.title || 'Caso'} — David Godoy`,description:c.excerpt || c.problem} : {title:'Caso no encontrado — David Godoy'}
 }
 export default async function Caso({params}:Props) {
   const {slug}=await params
-  const [c,cases] = await Promise.all([client.fetch<CaseDocument | null>(CASE_QUERY,{slug}),client.fetch<CaseSummary[]>(CASE_ORDER_QUERY)])
+  const {reader,notice}=await getContentContext();
+  const [c,cases] = await Promise.all([(reader || client).fetch<CaseDocument | null>(CASE_QUERY,{slug}),(reader || client).fetch<CaseSummary[]>(CASE_ORDER_QUERY)])
   if(!c)notFound()
   const blocks = caseBlocks(c.process)
   const outline = caseOutline(blocks)
@@ -38,6 +41,7 @@ export default async function Caso({params}:Props) {
   const image = hasImageAsset(c.thumbnail) ? urlFor(c.thumbnail).width(1800).auto('format').url() : null
   const metrics = c.metrics?.filter(m=>m.label && typeof m.value==='number') || []
   return <main className="case-article">
+    {notice && <p role="status">{notice}</p>}
     <nav className="case-breadcrumb" aria-label="Ruta de navegación"><Link href="/casos">Trabajo</Link>{c.title && <><span aria-hidden>/</span><span aria-current="page">{c.title}</span></>}</nav>
     {(c.title || c.excerpt || c.problem) && <header className="case-article-header">{c.title && <h1>{c.title}</h1>}{c.excerpt && <p className="case-deck">{c.excerpt}</p>}{c.problem && <p className="case-problem">{c.problem}</p>}</header>}
     {image && <figure className="case-cover"><MediaReveal><Image src={image} alt={c.thumbnail?.alt || ''} width={c.thumbnail?.asset?.metadata?.dimensions?.width || 1400} height={c.thumbnail?.asset?.metadata?.dimensions?.height || 900} sizes="(min-width: 1200px) 1200px, 100vw" priority /></MediaReveal></figure>}
